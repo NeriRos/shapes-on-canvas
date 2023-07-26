@@ -23,6 +23,11 @@ The canvas to display the shapes.
 
 - [ ] Create a canvas context provider
 - [ ] Create the canvas component
+- [ ] Create a shape model
+
+**Notes**
+
+The context should expose a function to add a shape to the canvas.
 
 ## Feature - Adding Shapes
 
@@ -40,6 +45,10 @@ Here is what should happen after this feature is implemented:
 - [ ] Create form component
 - [ ] Register click listener on canvas
 - [ ] Create shape on canvas
+
+**Notes**
+
+modal should be html5 dialog element
 
 ## Feature - Mouse coordinates
 
