@@ -1,27 +1,20 @@
 "use client"
 
 import styles from "./Canvas.module.css"
-import { ReactNode, useRef, useState } from "react"
-import { CanvasContext } from "@/app/(canvas)/components/Canvas/CanvasContext"
+import { forwardRef, useMemo } from "react"
+import { useCanvas } from "@/app/(canvas)/components/Canvas/CanvasContext"
+import { ShapesToComponentMap } from "@/app/(canvas)/components/Shapes/ShapesToComponentMap"
 
-export type CanvasProps = {
-    items: ReactNode[],
-    children: ReactNode
-}
+export const Canvas = forwardRef((props, ref) => {
+    const { shapes } = useCanvas()
 
-export const Canvas = (props: CanvasProps) => {
-    const canvasRef = useRef(null)
+    const shapesNodes = useMemo(() => shapes.map((shape, index) => {
+        const Component = ShapesToComponentMap[shape.type]
 
-    const [items, setItems] = useState(props.items)
+        return <Component key={index} {...shape} />
+    }))
 
-    const addShape = (item: ReactNode) => {
-        setItems((items) => [...items, item])
-    }
-
-    return <CanvasContext.Provider value={{ ref: canvasRef, items, addShape }}>
-        <canvas ref={canvasRef} className={styles.canvas}>
-            {items}
-        </canvas>
-        {props.children}
-    </CanvasContext.Provider>
-}
+    return <canvas ref={ref} className={styles.canvas}>
+        {shapesNodes}
+    </canvas>
+})

@@ -1,14 +1,9 @@
 "use client"
 
-import { createContext, ReactNode, RefObject, useContext } from "react"
+import { createContext, useContext } from "react"
+import { CanvasProviderData } from "@/app/(canvas)/components/Canvas/useCanvasProvider"
 
-export type CanvasContextType = {
-    ref: RefObject<HTMLCanvasElement>,
-    items: ReactNode[],
-    addShape: (shape: ReactNode) => void
-}
-
-export const CanvasContext = createContext<CanvasContextType>(null as any)
+export const CanvasContext = createContext<CanvasProviderData>(null as any)
 
 export const useCanvas = () => {
     return useContext(CanvasContext)
