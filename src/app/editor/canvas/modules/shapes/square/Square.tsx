@@ -4,7 +4,11 @@ import { useEffect } from "react"
 import { SquareShape } from "@/editor/canvas/modules/shapes/square/SquareShape"
 import { useCanvas } from "@/editor/canvas/context"
 
-export const Square = ({ position, color, attributes, id }: SquareShape) => {
+export type SquareProps = SquareShape & {
+    redrawTimes: number
+}
+
+export const Square = ({ position, color, attributes, id, redraw }: SquareProps) => {
     const canvas = useCanvas()
 
     const draw = (context: CanvasRenderingContext2D) => {
@@ -16,7 +20,7 @@ export const Square = ({ position, color, attributes, id }: SquareShape) => {
         const context = canvas?.ref.current?.getContext("2d")
 
         draw(context)
-    }, [])
+    }, [redraw])
 
     return <></>
 }
