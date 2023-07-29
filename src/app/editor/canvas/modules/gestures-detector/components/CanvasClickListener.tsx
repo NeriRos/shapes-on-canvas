@@ -6,6 +6,7 @@ import { Shapes } from "@/editor/canvas/modules/shapes/Shapes"
 
 export type CanvasClickListenerProps = {
     shape: Omit<Shapes, "id" | "position">,
+    action: (shape: Omit<Shapes, "id">) => void
 }
 
 export const CanvasClickListener = (props: CanvasClickListenerProps) => {
@@ -13,16 +14,15 @@ export const CanvasClickListener = (props: CanvasClickListenerProps) => {
 
     const onClick = (e: MouseEvent) => {
         let rect = ref.current.getBoundingClientRect()
-        let x = e.clientX - rect.left
-        let y = e.clientY - rect.top
-
-        addShape({
+        const shape: Shapes = {
             ...props.shape,
             position: {
-                x,
-                y,
+                x: e.clientX - rect.left,
+                y: e.clientY - rect.top,
             },
-        })
+        }
+
+        props.action(shape)
     }
 
     useEffect(() => {
