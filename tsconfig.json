@@ -25,6 +25,9 @@
       ],
       "@/*": [
         "src/*"
+      ],
+      "@/editor/*": [
+        "src/app/editor/*"
       ]
     },
     "plugins": [

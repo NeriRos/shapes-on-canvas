@@ -1,4 +1,4 @@
-import { SquareShape } from "@/app/(canvas)/components/Shapes/Square"
+import { SquareShape } from "@/editor/canvas/components/shapes/square"
 
 export type Shape = {
     id: string

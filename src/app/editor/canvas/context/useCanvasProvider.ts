@@ -1,7 +1,7 @@
 "use client"
 
 import { RefObject, useState } from "react"
-import { Shapes } from "@/app/(canvas)/components/Shapes/Shapes"
+import { Shapes } from "@/editor/canvas/components/shapes/Shapes"
 
 export type CanvasProviderData = {
     shapes: Shapes[]
@@ -11,7 +11,7 @@ export type CanvasProviderData = {
 }
 
 export type CanvasProviderHookProps = {
-    shapes: Shapes[],
+    shapes?: Shapes[],
     ref: RefObject<HTMLCanvasElement>
 }
 

@@ -2,8 +2,8 @@
 
 import styles from "./Canvas.module.css"
 import { forwardRef, useMemo } from "react"
-import { useCanvas } from "@/app/(canvas)/components/Canvas/CanvasContext"
-import { ShapesToComponentMap } from "@/app/(canvas)/components/Shapes/ShapesToComponentMap"
+import { ShapesToComponentMap } from "@/editor/canvas/components/shapes/ShapesToComponentMap"
+import { useCanvas } from "@/editor/canvas/context"
 
 export const Canvas = forwardRef((props, ref) => {
     const { shapes } = useCanvas()

@@ -2,8 +2,8 @@
 
 import React from "react"
 import styles from "./FloatingMenu.module.css"
-import { useCanvas } from "@/app/(canvas)/components/Canvas/CanvasContext"
-import { SQUARE_SHAPE_TYPE } from "@/app/(canvas)/components/Shapes/Square"
+import { SQUARE_SHAPE_TYPE } from "src/app/editor/canvas/components/shapes/square"
+import { useCanvas } from "@/editor/canvas/context"
 
 export type FloatingMenuProps = {}
 

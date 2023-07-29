@@ -1,4 +1,4 @@
-import { Shape } from "@/app/(canvas)/components/Shapes/Shapes"
+import { Shape } from "@/editor/canvas/components/shapes/Shapes"
 
 export const SQUARE_SHAPE_TYPE = "square"
 
