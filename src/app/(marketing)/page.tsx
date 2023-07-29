@@ -1,6 +1,6 @@
 import styles from "./index.module.css"
 import Link from "next/link"
-import { GET_STARTED_URL, TEXTS } from "@/app/(marketing)/consts"
+import { GET_STARTED_URL, TEXTS } from "./consts"
 
 export default function() {
     return (
