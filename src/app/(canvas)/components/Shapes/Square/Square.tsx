@@ -1,21 +1,15 @@
 "use client"
 
 import { useCanvas } from "@/app/(canvas)/components/Canvas/CanvasContext"
-import { useEffect, useRef } from "react"
+import { useEffect } from "react"
+import { SquareShape } from "@/app/(canvas)/components/Shapes/Square/SquareShape"
 
-export type SquareProps = {
-    x: number,
-    y: number,
-    size: number,
-    color: string
-}
-
-export const Square = (props: SquareProps) => {
+export const Square = ({ position, color, attributes, id }: SquareShape) => {
     const canvas = useCanvas()
 
     const draw = (context: CanvasRenderingContext2D) => {
-        context.fillStyle = props.color
-        context.fillRect(props.x, props.y, props.size, props.size)
+        context.fillStyle = color
+        context.fillRect(position.x, position.y, attributes.size, attributes.size)
     }
 
     useEffect(() => {
