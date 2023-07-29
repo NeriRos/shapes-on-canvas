@@ -5,7 +5,8 @@ import { ReactNode, useRef, useState } from "react"
 import { CanvasContext } from "@/app/(canvas)/components/Canvas/CanvasContext"
 
 export type CanvasProps = {
-    items: ReactNode[]
+    items: ReactNode[],
+    children: ReactNode
 }
 
 export const Canvas = (props: CanvasProps) => {
@@ -21,7 +22,6 @@ export const Canvas = (props: CanvasProps) => {
         <canvas ref={canvasRef} className={styles.canvas}>
             {items}
         </canvas>
+        {props.children}
     </CanvasContext.Provider>
-
-
 }
