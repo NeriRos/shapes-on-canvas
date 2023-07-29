@@ -1,9 +1,9 @@
-"use client";
+"use client"
 
 import React from "react"
 import styles from "./FloatingMenu.module.css"
 import { useCanvas } from "@/app/(canvas)/components/Canvas/CanvasContext"
-import { Square } from "@/app/(canvas)/components/Shapes/Square"
+import { SQUARE_SHAPE_TYPE } from "@/app/(canvas)/components/Shapes/Square"
 
 export type FloatingMenuProps = {}
 
@@ -11,12 +11,18 @@ export const FloatingMenu = (props: FloatingMenuProps) => {
     const { addShape } = useCanvas()
 
     const add = () => {
-        addShape(<Square x={10} y={100} size={20} color={"blue"} />)
+        addShape({
+            type: SQUARE_SHAPE_TYPE,
+            position: { x: 20, y: 20 },
+            color: "blue",
+            attributes: { size: 20 },
+            id: 2,
+        })
     }
 
     return <div className={styles.container}>
         <button onClick={add}>
-            asdasda
+            Add Shape
         </button>
     </div>
 }
