@@ -18,8 +18,12 @@ export type CanvasProviderHookProps = {
 export const useCanvasProvider = (props: CanvasProviderHookProps): CanvasProviderData => {
     const [shapes, setShapes] = useState(props.shapes || [])
 
-    const addShape = (item: Shape) => {
-        setShapes((items) => [...items, item])
+    const addShape = (item: Omit<Shape, "id">) => {
+        setShapes((items) => {
+            const id = Math.random().toString(36).substring(2, 9)
+
+            return [...items, { ...item, id }]
+        })
     }
 
     const removeShape = (id: string) => {
