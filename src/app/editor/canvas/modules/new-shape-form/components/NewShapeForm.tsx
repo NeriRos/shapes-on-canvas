@@ -28,17 +28,17 @@ export const NewShapeForm = (props: NewShapeFormProps) => {
             <button className={Styles.closeButton} onClick={props.onClose}>Close</button>
             <label>
                 <span>Title</span>
-                <input type="text" name="title" defaultValue={props.initialData.title} />
+                <input type="text" name="title" defaultValue={data?.title} />
             </label>
             <label>
                 <span>Type</span>
-                <select name={"type"} defaultValue={data.type} onChange={changeType}>
+                <select name={"type"} defaultValue={data?.type} onChange={changeType}>
                     {Object.entries(ShapesToComponentMap).map(([key, value]) =>
                         <option key={key} value={key}>{value.name}</option>)}
                 </select>
             </label>
             <div className={Styles.row}>
-                {Object.keys(data.attributes).map((key) => {
+                {Object.keys(data?.attributes || {}).map((key) => {
                     return (
                         <label key={key}>
                             <span>{key}</span>

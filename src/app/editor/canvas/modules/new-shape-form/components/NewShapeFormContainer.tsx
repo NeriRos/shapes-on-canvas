@@ -10,7 +10,7 @@ import { useCanvas } from "@/editor/canvas/context"
 import { useView } from "@/app/view/context"
 import { POPUPS } from "@/app/view/context/consts"
 
-export const NewShapeFormContainer = () => {
+export const NewShapeFormContainer = (props: { listenToCanvasClick: boolean }) => {
     const { addShape } = useCanvas()
     const [shape, setShape] = useState<Shapes>()
     const { displayPopup, popupView } = useView()
@@ -35,19 +35,19 @@ export const NewShapeFormContainer = () => {
         displayPopup(POPUPS.NONE)
     }
 
-    const show = popupView == POPUPS.NEW_SHAPE_FORM;
+    const show = popupView == POPUPS.NEW_SHAPE_FORM
 
     return (
         <div className={clsx([Styles.formContainer, show && Styles.active])} onClick={handleOutsideClick}>
             {show ?
                 <NewShapeForm onClose={close} onSubmit={onSubmit} initialData={shape} /> : null}
-            <CanvasClickListener action={showForm} shape={{
+            {props.listenToCanvasClick ? <CanvasClickListener action={showForm} shape={{
                 type: "square",
                 color: "red",
                 attributes: {
                     size: 120,
                 },
-            }} />
+            }} /> : null}
         </div>
     )
 }

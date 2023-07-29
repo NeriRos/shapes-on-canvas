@@ -8,7 +8,12 @@ export const useNewShapeForm = (props: {
     initialData: Shapes,
     onSubmit: (data: Shapes) => void,
 }) => {
-    const [data, setData] = React.useState<Shapes>(props.initialData)
+    const [data, setData] = React.useState<Shapes>(props.initialData || {
+        type: SQUARE_SHAPE_TYPE,
+        attributes: {
+            size: 100,
+        },
+    })
 
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
