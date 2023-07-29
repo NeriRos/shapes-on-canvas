@@ -40,11 +40,13 @@ Here is what should happen after this feature is implemented:
 
 **Tasks**
 
-- [ ] Create rectangle shape component
-- [ ] Create modal component
-- [ ] Create form component
-- [ ] Register click listener on canvas
-- [ ] Create shape on canvas
+- [x] Create rectangle shape component
+- [x] Create new shape form component
+- [x] Register click listener on canvas
+- [x] Create shape on canvas
+
+- [x] create floating menu
+- [x] Register click listener on floating menu
 
 **Notes**
 
