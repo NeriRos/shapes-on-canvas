@@ -8,7 +8,7 @@ import { useCanvas } from "@/editor/canvas/context"
 export const Canvas = forwardRef((props, ref) => {
     const { shapes } = useCanvas()
 
-    const shapesNodes = useMemo(() => shapes.map((shape, index) => {
+    const shapesNodes = useMemo(() => shapes?.map((shape, index) => {
         const Component = ShapesToComponentMap[shape.type]
 
         return <Component key={index} {...shape} />

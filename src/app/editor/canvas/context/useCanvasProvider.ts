@@ -16,7 +16,7 @@ export type CanvasProviderHookProps = {
 }
 
 export const useCanvasProvider = (props: CanvasProviderHookProps): CanvasProviderData => {
-    const [shapes, setShapes] = useState(props.shapes)
+    const [shapes, setShapes] = useState(props.shapes || [])
 
     const addShape = (item: Shapes) => {
         setShapes((items) => [...items, item])
