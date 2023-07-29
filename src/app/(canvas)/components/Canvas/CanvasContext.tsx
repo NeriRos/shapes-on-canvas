@@ -1,9 +1,11 @@
+"use client"
+
 import { createContext, ReactNode, RefObject, useContext } from "react"
 
 export type CanvasContextType = {
     ref: RefObject<HTMLCanvasElement>,
     items: ReactNode[],
-    addItem: (item: ReactNode) => void
+    addShape: (shape: ReactNode) => void
 }
 
 export const CanvasContext = createContext<CanvasContextType>(null as any)

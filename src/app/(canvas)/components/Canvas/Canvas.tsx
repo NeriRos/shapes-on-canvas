@@ -13,11 +13,11 @@ export const Canvas = (props: CanvasProps) => {
 
     const [items, setItems] = useState(props.items)
 
-    const addItem = (item: ReactNode) => {
+    const addShape = (item: ReactNode) => {
         setItems((items) => [...items, item])
     }
 
-    return <CanvasContext.Provider value={{ ref: canvasRef, items, addItem }}>
+    return <CanvasContext.Provider value={{ ref: canvasRef, items, addShape }}>
         <canvas ref={canvasRef} className={styles.canvas}>
             {items}
         </canvas>
