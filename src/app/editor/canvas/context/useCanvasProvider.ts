@@ -1,24 +1,24 @@
 "use client"
 
 import { RefObject, useState } from "react"
-import { Shapes } from "@/editor/canvas/components/shapes/Shapes"
+import { Shape } from "@/editor/canvas/components/shape/Shape"
 
 export type CanvasProviderData = {
-    shapes: Shapes[]
-    addShape: (item: Shapes) => void
+    shapes: Shape[]
+    addShape: (item: Shape) => void
     removeShape: (id: string) => void
     ref: RefObject<HTMLCanvasElement>
 }
 
 export type CanvasProviderHookProps = {
-    shapes?: Shapes[],
+    shapes?: Shape[],
     ref: RefObject<HTMLCanvasElement>
 }
 
 export const useCanvasProvider = (props: CanvasProviderHookProps): CanvasProviderData => {
     const [shapes, setShapes] = useState(props.shapes || [])
 
-    const addShape = (item: Shapes) => {
+    const addShape = (item: Shape) => {
         setShapes((items) => [...items, item])
     }
 

@@ -2,7 +2,7 @@
 
 import styles from "./Canvas.module.css"
 import { forwardRef, useMemo } from "react"
-import { ShapesToComponentMap } from "@/editor/canvas/components/shapes/ShapesToComponentMap"
+import { ShapesToComponentMap } from "@/editor/canvas/modules/shapes/ShapesToComponentMap"
 import { useCanvas } from "@/editor/canvas/context"
 
 export const Canvas = forwardRef((props, ref) => {

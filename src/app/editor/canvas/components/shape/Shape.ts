@@ -1,4 +1,4 @@
-import { SquareShape } from "@/editor/canvas/components/shapes/square"
+import { SquareShape } from "@/editor/canvas/modules/shapes/square"
 
 export type Shape = {
     id: string
@@ -9,4 +9,4 @@ export type Shape = {
     }
 };
 
-export type Shapes = SquareShape;
+export type Shape = SquareShape;

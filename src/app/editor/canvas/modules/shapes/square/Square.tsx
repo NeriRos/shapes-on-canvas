@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect } from "react"
-import { SquareShape } from "@/editor/canvas/components/shapes/square/SquareShape"
+import { SquareShape } from "@/editor/canvas/modules/shapes/square/SquareShape"
 import { useCanvas } from "@/editor/canvas/context"
 
 export const Square = ({ position, color, attributes, id }: SquareShape) => {

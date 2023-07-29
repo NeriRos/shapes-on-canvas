@@ -1,14 +1,14 @@
 "use client"
 
 import { ReactNode, useRef } from "react"
-import { Shapes } from "@/editor/canvas/components/shapes/Shapes"
+import { Shape } from "@/editor/canvas/components/shape/Shape"
 import { Canvas } from "@/editor/canvas/components/canvas/Canvas"
 import { useCanvasProvider } from "@/editor/canvas/context/useCanvasProvider"
 import { CanvasContext } from "@/editor/canvas/context/CanvasContext"
 import Styles from "@/editor/canvas/components/CanvasContainer.module.css"
 
 export type CanvasContainerProps = {
-    shapes?: Shapes[],
+    shapes?: Shape[],
     children?: ReactNode
 }
 
