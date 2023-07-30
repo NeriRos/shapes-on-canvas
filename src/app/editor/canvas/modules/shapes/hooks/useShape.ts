@@ -20,13 +20,24 @@ export const useShape = ({ draw, redrawTimes, shape }: ShapeHookProps) => {
         const context = canvas?.ref.current?.getContext("2d")
         if (context)
             setContext(context)
-    }, [redrawTimes])
+    }, [canvas?.ref, redrawTimes])
 
     useEffect(() => {
         if (context) {
             draw(context)
         }
-    }, [context, redrawTimes])
+    }, [context, draw])
+
+    useEffect(() => {
+        if (context && shape.isDragging) {
+            context.clearRect(
+                shape.position.x,
+                shape.position.y,
+                shape.attributes.width,
+                shape.attributes.height,
+            )
+        }
+    }, [context, draw, redrawTimes, shape])
 
     return {
         fillColor,
