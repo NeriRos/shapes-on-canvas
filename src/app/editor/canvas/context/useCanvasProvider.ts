@@ -2,10 +2,11 @@
 
 import { RefObject, useState } from "react"
 import { Shape } from "@/editor/canvas/components/shape/Shape"
+import { ShapesWithoutId } from "@/editor/canvas/modules/shapes/types"
 
 export type CanvasProviderData = {
     shapes: Shape[]
-    addShape: (item: Shape) => void
+    addShape: (item: ShapesWithoutId) => void
     removeShape: (id: string) => void
     ref: RefObject<HTMLCanvasElement>
 }
@@ -18,7 +19,7 @@ export type CanvasProviderHookProps = {
 export const useCanvasProvider = (props: CanvasProviderHookProps): CanvasProviderData => {
     const [shapes, setShapes] = useState(props.shapes || [])
 
-    const addShape = (item: Omit<Shape, "id">) => {
+    const addShape = (item: ShapesWithoutId) => {
         setShapes((items) => {
             const id = Math.random().toString(36).substring(2, 9)
 
