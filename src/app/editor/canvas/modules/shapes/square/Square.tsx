@@ -17,5 +17,5 @@ export const Square = ({ position, color, attributes, id, redrawTimes }: SquareP
         },
     })
 
-    return <></>
+    return null
 }
