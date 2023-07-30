@@ -2,11 +2,12 @@ import React from "react"
 import { Shapes, ShapesWithoutId } from "@/editor/canvas/modules/shapes/types"
 import { isSquareShape, SHAPE_TYPE_SQUARE } from "@/editor/canvas/modules/shapes/square/consts"
 import { isRectangleShape } from "@/editor/canvas/modules/shapes/rectangle/consts"
+import { useCanvas } from "@/editor/canvas/context"
 
 export const useNewShapeForm = (props: {
     initialData?: ShapesWithoutId,
-    onSubmit: (data: Shapes) => void,
 }) => {
+    const { addShape } = useCanvas()
     const [data, setData] = React.useState<ShapesWithoutId>(props.initialData || {
         type: SHAPE_TYPE_SQUARE,
         color: "#000000",
@@ -24,21 +25,23 @@ export const useNewShapeForm = (props: {
         event.preventDefault()
 
         const formData = new FormData(event.currentTarget)
-        const data = Object.fromEntries(formData.entries())
-        console.log(data)
-        //
-        // const shape: Shapes = {
-        //     type: data.type,
-        //     position: {
-        //         x: parseInt(data.x),
-        //         y: parseInt(data.y),
-        //     },
-        //     title: data.title,
-        // }
-        //
-        // shape.attributes = setAttribute(data)
-        //
-        // props.onSubmit(shape)
+        const data: any = Object.fromEntries(formData.entries())
+
+        const shape: ShapesWithoutId = {
+            type: data.type,
+            color: data.color,
+            position: {
+                x: parseInt(data.x),
+                y: parseInt(data.y),
+            },
+            title: data.title,
+            attributes: setAttribute({
+                type: data.type,
+                attributes: data,
+            }),
+        }
+
+        addShape(shape)
     }
 
     const changeType = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -51,7 +54,7 @@ export const useNewShapeForm = (props: {
         })
     }
 
-    const setAttribute = (data: ShapesWithoutId) => {
+    const setAttribute = (data: Pick<Shapes, "type" | "attributes">) => {
         if (isSquareShape(data)) {
             data.attributes = {
                 size: data.attributes.size ? data.attributes.size : 100,

@@ -11,7 +11,7 @@ export type NewShapeFormProps = {
 }
 
 export const NewShapeForm = (props: NewShapeFormProps) => {
-    const { data, changeType, onSubmit } = useNewShapeForm({ initialData: props.initialData, onSubmit: props.onSubmit })
+    const { data, changeType, onSubmit } = useNewShapeForm({ initialData: props.initialData })
 
     return (
         <form className={Styles.form} onSubmit={onSubmit}>
