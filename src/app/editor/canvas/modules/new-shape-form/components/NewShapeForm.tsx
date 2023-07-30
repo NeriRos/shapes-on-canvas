@@ -1,22 +1,12 @@
 import React from "react"
-import { Shapes } from "@/editor/canvas/modules/shapes/Shapes"
+import { Shapes, ShapesWithoutId } from "@/editor/canvas/modules/shapes/types"
 import Styles from "./NewShapeForm.module.css"
 import { ShapesToComponentMap } from "@/editor/canvas/modules/shapes/ShapesToComponentMap"
 import { useNewShapeForm } from "@/editor/canvas/modules/new-shape-form/components/useNewShapeForm"
 
-export type NewShapeFormData = {
-    title: string,
-    type: keyof typeof ShapesToComponentMap,
-    height: number,
-    width: number,
-    x: number,
-    y: number
-}
-
 export type NewShapeFormProps = {
-    shapes?: Shapes,
     onSubmit: (formData: Shapes) => void,
-    initialData?: Shapes,
+    initialData?: ShapesWithoutId,
     onClose: () => void,
 }
 
@@ -42,7 +32,7 @@ export const NewShapeForm = (props: NewShapeFormProps) => {
                     return (
                         <label key={key}>
                             <span>{key}</span>
-                            <input type="number" name={key} defaultValue={data?.attributes[key]} />
+                            <input type="number" name={key} defaultValue={(data as any).attributes[key]} />
                         </label>
                     )
                 })}

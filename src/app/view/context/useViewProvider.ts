@@ -1,25 +1,25 @@
 "use client"
 
 import { useState } from "react"
-import { POPUPS, SCREENS } from "@/app/view/context"
+import { Popups, Screens, ViewProviderData } from "@/app/view/context"
 
-export type ViewProviderData = {
-    screen: keyof typeof SCREENS,
-    popupView: keyof typeof POPUPS,
-    displayPopup: (popup: keyof typeof POPUPS) => void
-}
+export const useViewProvider = (props: { screen: Screens }): ViewProviderData => {
+    const [popupView, setPopupView] = useState<Popups>(null)
+    const [screen, setScreen] = useState<Screens>(props.screen)
 
-export const useViewProvider = (props: { screen: ViewProviderData["screen"] }): ViewProviderData => {
-    const [popupView, setPopupView] = useState<ViewProviderData["popupView"]>(POPUPS.NONE)
-    const [screen, setScreen] = useState<ViewProviderData["screen"]>(props.screen)
+    const togglePopup = (popup: Popups, state?: boolean) => {
+        setPopupView((current) => {
+            if (state !== undefined) {
+                return state ? popup : null
+            }
 
-    const displayPopup = (popup: ViewProviderData["popupView"]) => {
-        setPopupView(popup)
+            return current === popup ? null : popup
+        })
     }
 
     return {
         popupView,
-        displayPopup,
+        togglePopup,
         screen,
     }
 }

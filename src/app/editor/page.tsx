@@ -3,10 +3,10 @@ import { FloatingMenu } from "@/editor/coordinates/components/floating-menu/Floa
 import { CanvasContainer } from "@/editor/canvas/components/CanvasContainer"
 import { NewShapeFormContainer } from "@/editor/canvas/modules/new-shape-form/components/NewShapeFormContainer"
 import { ViewProvider } from "@/app/view/context/ViewProvider"
-import { SCREENS } from "@/app/view/context"
+import { SCREEN_EDITOR } from "@/app/view/context"
 
 export default function() {
-    return <ViewProvider screen={SCREENS.EDITOR}>
+    return <ViewProvider screen={SCREEN_EDITOR}>
         <CanvasContainer>
             <FloatingMenu />
             <NewShapeFormContainer />

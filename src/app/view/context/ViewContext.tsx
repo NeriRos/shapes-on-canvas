@@ -1,7 +1,7 @@
 "use client"
 
 import { createContext, useContext } from "react"
-import { ViewProviderData } from "./useViewProvider"
+import { ViewProviderData } from "@/app/view/context/types"
 
 export const ViewContext = createContext<ViewProviderData>(null as any)
 

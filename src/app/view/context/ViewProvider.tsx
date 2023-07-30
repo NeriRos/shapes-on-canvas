@@ -2,10 +2,11 @@
 
 import { ViewContext } from "@/app/view/context/ViewContext"
 import { ReactNode } from "react"
-import { useViewProvider, ViewProviderData } from "@/app/view/context/useViewProvider"
+import { useViewProvider } from "@/app/view/context/useViewProvider"
+import { Screens } from "@/app/view/context/types"
 
-export const ViewProvider = (props: { screen: ViewProviderData["screen"], children: ReactNode }) => {
-    const providerData = useViewProvider(props.screen)
+export const ViewProvider = (props: { screen: Screens, children: ReactNode }) => {
+    const providerData = useViewProvider({ screen: props.screen })
 
     return (
         <ViewContext.Provider value={providerData}>

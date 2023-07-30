@@ -1,26 +1,25 @@
 "use client"
 
 import { CanvasClickListener } from "@/editor/canvas/modules/gestures-detector/components/CanvasClickListener"
-import React, { useState } from "react"
-import { Shapes } from "@/editor/canvas/modules/shapes/Shapes"
+import React, { MouseEvent, useState } from "react"
+import { Shapes, ShapesWithoutId } from "@/editor/canvas/modules/shapes/types"
 import { NewShapeForm } from "@/editor/canvas/modules/new-shape-form/components/NewShapeForm"
 import Styles from "./NewShapeForm.module.css"
 import clsx from "clsx"
 import { useCanvas } from "@/editor/canvas/context"
-import { useView } from "@/app/view/context"
-import { POPUPS } from "@/app/view/context/consts"
+import { POPUP_NEW_SHAPE_FORM, useView } from "@/app/view/context"
 
-export const NewShapeFormContainer = (props: { listenToCanvasClick: boolean }) => {
+export const NewShapeFormContainer = (props: { listenToCanvasClick?: boolean }) => {
     const { addShape } = useCanvas()
-    const [shape, setShape] = useState<Shapes>()
-    const { displayPopup, popupView } = useView()
+    const [shape, setShape] = useState<ShapesWithoutId>()
+    const { togglePopup, popupView } = useView()
 
-    const showForm = (shape: Shapes) => {
+    const showForm = (shape: ShapesWithoutId) => {
         setShape(shape)
-        displayPopup(POPUPS.NEW_SHAPE_FORM)
+        togglePopup(POPUP_NEW_SHAPE_FORM, true)
     }
 
-    const handleOutsideClick = (e) => {
+    const handleOutsideClick = (e: MouseEvent) => {
         if (e.target !== e.currentTarget) return
 
         close()
@@ -32,16 +31,17 @@ export const NewShapeFormContainer = (props: { listenToCanvasClick: boolean }) =
     }
 
     const close = () => {
-        displayPopup(POPUPS.NONE)
+        togglePopup(null)
     }
 
-    const show = popupView == POPUPS.NEW_SHAPE_FORM
+    const show = popupView == POPUP_NEW_SHAPE_FORM
 
     return (
         <div className={clsx([Styles.formContainer, show && Styles.active])} onClick={handleOutsideClick}>
             {show ?
                 <NewShapeForm onClose={close} onSubmit={onSubmit} initialData={shape} /> : null}
             {props.listenToCanvasClick ? <CanvasClickListener action={showForm} shape={{
+                title: "",
                 type: "square",
                 color: "red",
                 attributes: {

@@ -1,15 +1,20 @@
 import React from "react"
-import { Shapes } from "@/editor/canvas/modules/shapes/Shapes"
-import { SQUARE_SHAPE_TYPE } from "@/editor/canvas/modules/shapes/square"
-import { RECTANGLE_SHAPE_TYPE } from "@/editor/canvas/modules/shapes/rectangle"
-import { NewShapeFormData } from "@/editor/canvas/modules/new-shape-form/components/NewShapeForm"
+import { Shapes, ShapesWithoutId } from "@/editor/canvas/modules/shapes/types"
+import { isSquareShape, SHAPE_TYPE_SQUARE } from "@/editor/canvas/modules/shapes/square/consts"
+import { isRectangleShape } from "@/editor/canvas/modules/shapes/rectangle/consts"
 
 export const useNewShapeForm = (props: {
-    initialData: Shapes,
+    initialData?: ShapesWithoutId,
     onSubmit: (data: Shapes) => void,
 }) => {
-    const [data, setData] = React.useState<Shapes>(props.initialData || {
-        type: SQUARE_SHAPE_TYPE,
+    const [data, setData] = React.useState<ShapesWithoutId>(props.initialData || {
+        type: SHAPE_TYPE_SQUARE,
+        color: "#000000",
+        title: "",
+        position: {
+            x: 0,
+            y: 0,
+        },
         attributes: {
             size: 100,
         },
@@ -17,31 +22,28 @@ export const useNewShapeForm = (props: {
 
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        const data: NewShapeFormData = {}
 
-        for (const element of event.currentTarget.elements) {
-            if (element instanceof HTMLInputElement || element instanceof HTMLSelectElement) {
-                data[element.name] = element.value
-            }
-        }
-
-        const shape: Shapes = {
-            type: data.type,
-            position: {
-                x: parseInt(data.x),
-                y: parseInt(data.y),
-            },
-            title: data.title,
-        }
-
-        shape.attributes = setAttribute(data)
-
-        props.onSubmit(shape)
+        const formData = new FormData(event.currentTarget)
+        const data = Object.fromEntries(formData.entries())
+        console.log(data)
+        //
+        // const shape: Shapes = {
+        //     type: data.type,
+        //     position: {
+        //         x: parseInt(data.x),
+        //         y: parseInt(data.y),
+        //     },
+        //     title: data.title,
+        // }
+        //
+        // shape.attributes = setAttribute(data)
+        //
+        // props.onSubmit(shape)
     }
 
     const changeType = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setData((data) => {
-            data.type = event.target.value
+            data.type = event.target.value as Shapes["type"]
 
             data.attributes = setAttribute(data)
 
@@ -49,26 +51,19 @@ export const useNewShapeForm = (props: {
         })
     }
 
-    const setAttribute = (data: NewShapeFormData) => {
-        const dataWithAttributes: NewShapeFormData & { attributes: Shapes["attributes"] } = data
-
-        switch (dataWithAttributes.type) {
-            case SQUARE_SHAPE_TYPE:
-                dataWithAttributes.attributes = {
-                    size: data.size ? parseInt(data.size) : 100,
-                }
-                break
-            case RECTANGLE_SHAPE_TYPE:
-                dataWithAttributes.attributes = {
-                    width: data.width ? parseInt(data.width) : 100,
-                    height: data.height ? parseInt(data.height) : 100,
-                }
-                break
-            default:
-                dataWithAttributes.attributes = {}
+    const setAttribute = (data: ShapesWithoutId) => {
+        if (isSquareShape(data)) {
+            data.attributes = {
+                size: data.attributes.size ? data.attributes.size : 100,
+            }
+        } else if (isRectangleShape(data)) {
+            data.attributes = {
+                width: data.attributes.width ? data.attributes.width : 100,
+                height: data.attributes.height ? data.attributes.height : 100,
+            }
         }
 
-        return dataWithAttributes.attributes
+        return data.attributes
     }
 
     return {

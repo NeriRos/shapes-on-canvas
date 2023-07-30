@@ -13,7 +13,7 @@ export type CanvasContainerProps = {
 }
 
 export const CanvasContainer = (props: CanvasContainerProps) => {
-    const canvasRef = useRef(null)
+    const canvasRef = useRef<HTMLCanvasElement>(null)
     const providerData = useCanvasProvider({ ref: canvasRef, shapes: props.shapes })
 
     return <div className={Styles.container}>
