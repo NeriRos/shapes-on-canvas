@@ -1,6 +1,6 @@
 "use client"
 
-import { CanvasClickListener } from "@/editor/canvas/modules/gestures-detector/components/CanvasClickListener"
+import { MouseListener } from "@/editor/canvas/modules/gestures-detector/components/MouseListener"
 import React, { MouseEvent, useState } from "react"
 import { ShapesWithoutId } from "@/editor/canvas/modules/shapes/types"
 import { NewShapeForm } from "@/editor/canvas/modules/new-shape-form/components/NewShapeForm"
@@ -45,7 +45,7 @@ export const NewShapeFormContainer = (props: { listenToCanvasClick?: boolean }) 
 
                 {showPopup ? <NewShapeForm onSubmit={onSubmit} initialData={shape} /> : null}
 
-                {props.listenToCanvasClick ? <CanvasClickListener onClick={showForm} /> : null}
+                {props.listenToCanvasClick ? <MouseListener onClick={showForm} /> : null}
             </div>
         </div>
     )

@@ -3,7 +3,7 @@
 import { Position, Shape } from "@/editor/canvas/types/Shape"
 import { useCanvas } from "@/editor/canvas/context"
 import { useRef } from "react"
-import { CanvasClickListener } from "@/editor/canvas/modules/gestures-detector/components/CanvasClickListener"
+import { MouseListener } from "@/editor/canvas/modules/gestures-detector/components/MouseListener"
 
 export type MouseMoveListenerProps = {
     onMove: (x: number, y: number) => void
@@ -49,5 +49,5 @@ export const ShapeMouseMovementListener = (props: MouseMoveListenerProps) => {
         }
     }
 
-    return <CanvasClickListener onMouseMove={onMove} />
+    return <MouseListener onMouseMove={onMove} />
 }

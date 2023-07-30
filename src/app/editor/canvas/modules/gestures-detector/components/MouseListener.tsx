@@ -14,7 +14,7 @@ export type CanvasClickListenerProps = {
     onMouseMove?: ListenerFunction
 }
 
-export const CanvasClickListener = (props: CanvasClickListenerProps) => {
+export const MouseListener = (props: CanvasClickListenerProps) => {
     const { ref, shapes } = useCanvas()
 
     const getPosition = useCallback((e: MouseEvent) => {
