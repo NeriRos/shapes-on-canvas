@@ -4,7 +4,7 @@ import { CanvasClickListener } from "@/editor/canvas/modules/gestures-detector/c
 import React, { MouseEvent, useState } from "react"
 import { ShapesWithoutId } from "@/editor/canvas/modules/shapes/types"
 import { NewShapeForm } from "@/editor/canvas/modules/new-shape-form/components/NewShapeForm"
-import Styles from "./NewShapeForm.module.css"
+import Styles from "./NewShapeFormContainer.module.css"
 import clsx from "clsx"
 import { POPUP_NEW_SHAPE_FORM, useView } from "@/app/view/context"
 import { CloseButton } from "@/core/components/button"
