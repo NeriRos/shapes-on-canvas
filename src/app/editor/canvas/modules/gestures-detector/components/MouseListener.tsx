@@ -9,6 +9,7 @@ type ListenerFunction = (position: Position, shape?: Shapes, e?: MouseEvent) => 
 
 export type CanvasClickListenerProps = {
     onClick?: ListenerFunction
+    onDoubleClick?: ListenerFunction
     onMouseDown?: ListenerFunction
     onMouseUp?: ListenerFunction
     onMouseMove?: ListenerFunction
@@ -38,6 +39,15 @@ export const MouseListener = (props: CanvasClickListenerProps) => {
             }
         }
     }, [shapes])
+
+    const onDoubleClick = useCallback((e: MouseEvent) => {
+        if (props.onDoubleClick === undefined) return
+
+        const position = getPosition(e)
+        const shape = getShapeOnPosition(position)
+
+        props.onDoubleClick(position, shape, e)
+    }, [getPosition, getShapeOnPosition, props])
 
     const onClick = useCallback((e: MouseEvent) => {
         if (props.onClick === undefined) return
@@ -123,6 +133,18 @@ export const MouseListener = (props: CanvasClickListenerProps) => {
             element?.removeEventListener("mousemove", onMouseMove)
         }
     }, [onMouseMove, ref])
+
+    useEffect(() => {
+        const element = ref.current
+
+        // @ts-ignore
+        element?.addEventListener("dblclick", onDoubleClick)
+
+        return () => {
+            // @ts-ignore
+            element?.removeEventListener("dblclick", onDoubleClick)
+        }
+    }, [onDoubleClick, ref])
 
     return null
 }
