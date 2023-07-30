@@ -1,2 +1,2 @@
-export * from "./RectangleShape"
+export * from "./types"
 export * from "./Rectangle"

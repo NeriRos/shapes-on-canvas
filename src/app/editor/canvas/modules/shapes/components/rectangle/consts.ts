@@ -1,4 +1,4 @@
-import { RectangleShape } from "@/editor/canvas/modules/shapes/components/rectangle/RectangleShape"
+import { RectangleShape } from "@/editor/canvas/modules/shapes/components/rectangle"
 
 export const SHAPE_TYPE_RECTANGLE: RectangleShape["type"] = "rectangle"
 
