@@ -6,6 +6,7 @@ import { useCanvas } from "@/editor/canvas/context"
 
 export const useNewShapeForm = (props: {
     initialData?: ShapesWithoutId,
+    onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void,
 }) => {
     const { addShape } = useCanvas()
     const [data, setData] = React.useState<ShapesWithoutId>(props.initialData || {
@@ -43,6 +44,7 @@ export const useNewShapeForm = (props: {
         }
 
         addShape(shape)
+        props.onSubmit?.(event)
     }
 
     const changeType = (event: React.ChangeEvent<HTMLSelectElement>) => {
