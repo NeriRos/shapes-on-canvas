@@ -9,11 +9,11 @@ The goal is to create a simple app that can draw rectangle shapes. \
 
 **Tasks**
 
-- [ ] Create project with NextJS
-- [ ] Add typescript
-- [ ] Add tests with jest
-- [ ] Add eslint, prettier
-- [ ] Create layout for the app
+- [x] Create project with NextJS
+- [x] Add typescript
+- [x] Add tests with jest
+- [x] Add eslint, prettier
+- [x] Create layout for the app
 
 ## Feature - Shapes Canvas
 
@@ -60,7 +60,7 @@ Also, the points should show as integers.
 
 **Tasks**
 
-- [ ] Create a mouse coordinates context provider
+- [ ] Cre ate a mouse coordinates context provider
 - [ ] Create the mouse coordinates component
 - [ ] Register mouse move listener on shape
 - [ ] Calculate mouse coordinates relative to shape
