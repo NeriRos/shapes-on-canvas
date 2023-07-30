@@ -14,10 +14,12 @@ export const FloatingMenu = () => {
     }
 
     return <div className={styles.container}>
-        <h3 className={styles.title}>Details</h3>
+        <div className={styles.content}>
+            <h3 className={styles.title}>Details</h3>
 
-        <CoordinatesDisplay />
+            <CoordinatesDisplay />
 
-        <Button onClick={add}>+ Add a Shape</Button>
+            <Button onClick={add}>+ Add a Shape</Button>
+        </div>
     </div>
 }
