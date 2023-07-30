@@ -4,6 +4,7 @@ import {
 import Styles from "./CoordinatesDisplay.module.css"
 import { useState } from "react"
 import { Shape } from "@/editor/canvas/components/shape/Shape"
+import { TEXTS } from "@/editor/coordinates/components/coordinates-display/consts"
 
 export type CoordinatesDisplayProps = {}
 
@@ -11,8 +12,15 @@ export const CoordinatesDisplay = (props: CoordinatesDisplayProps) => {
     const [coordinates, setCoordinates] = useState({ x: 0, y: 0 })
     const [shape, setShape] = useState<Shape>()
 
-    const onMove = (position: Shape["position"]) => {
-        setCoordinates(position)
+    const onMove = (x: number, y: number) => {
+        setCoordinates({
+            x, y,
+        })
+    }
+
+    const onLeave = () => {
+        setShape(undefined)
+        setCoordinates({ x: 0, y: 0 })
     }
 
     const onShapeChange = (shape: Shape) => {
@@ -20,15 +28,15 @@ export const CoordinatesDisplay = (props: CoordinatesDisplayProps) => {
     }
 
     return <>
-        {shape?.title ? <div className={Styles.title}>
-            {shape.title}
-        </div> : null}
-        <div className={Styles.coordinateContainer}>
-            Mouse X - {coordinates.x}
+        <div className={Styles.title}>
+            {TEXTS.SHAPE} {shape?.title}
         </div>
         <div className={Styles.coordinateContainer}>
-            Mouse Y - {coordinates.y}
+            {TEXTS.X} {coordinates.x}
         </div>
-        <ShapeMouseMovementListener onMove={onMove} onShapeChange={onShapeChange} />
+        <div className={Styles.coordinateContainer}>
+            {TEXTS.Y} {coordinates.y}
+        </div>
+        <ShapeMouseMovementListener onLeave={onLeave} onMove={onMove} onShapeChange={onShapeChange} />
     </>
 }

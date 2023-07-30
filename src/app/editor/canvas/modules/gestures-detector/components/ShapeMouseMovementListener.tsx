@@ -5,7 +5,8 @@ import { useCanvas } from "@/editor/canvas/context"
 import { MouseEvent, useEffect, useRef } from "react"
 
 export type MouseMoveListenerProps = {
-    onMove: (position: Shape["position"]) => void
+    onMove: (x: number, y: number) => void
+    onLeave?: (x: number, y: number) => void
     onShapeChange?: (shape: Shape) => void
 }
 
@@ -19,6 +20,8 @@ export const ShapeMouseMovementListener = (props: MouseMoveListenerProps) => {
 
         const mouseX = e.clientX - rect.left
         const mouseY = e.clientY - rect.top
+
+        let hoveredOnShape = false
 
         for (let shape of shapes) {
             const position = shape.position
@@ -36,11 +39,15 @@ export const ShapeMouseMovementListener = (props: MouseMoveListenerProps) => {
                     props.onShapeChange?.(shape)
                 }
 
-                props.onMove({
-                    x: relativeX,
-                    y: relativeY,
-                })
+                props.onMove(relativeX, relativeY)
+
+                hoveredOnShape = true
             }
+        }
+
+        if (!hoveredOnShape) {
+            prevShapeId.current = undefined
+            props.onLeave?.(mouseX, mouseY)
         }
     }
 
