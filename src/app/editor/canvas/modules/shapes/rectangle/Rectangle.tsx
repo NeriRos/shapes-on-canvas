@@ -17,5 +17,5 @@ export const Rectangle = ({ position, color, attributes, redrawTimes }: Rectangl
         },
     })
 
-    return <></>
+    return null
 }

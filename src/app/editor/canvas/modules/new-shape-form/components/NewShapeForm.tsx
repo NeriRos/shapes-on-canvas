@@ -1,17 +1,20 @@
 import React from "react"
-import { Shapes, ShapesWithoutId } from "@/editor/canvas/modules/shapes/types"
+import { ShapesWithoutId } from "@/editor/canvas/modules/shapes/types"
 import Styles from "./NewShapeForm.module.css"
 import { ShapesToComponentMap } from "@/editor/canvas/modules/shapes/ShapesToComponentMap"
 import { useNewShapeForm } from "@/editor/canvas/modules/new-shape-form/components/useNewShapeForm"
 
 export type NewShapeFormProps = {
-    onSubmit: (formData: Shapes) => void,
+    onSubmit: () => void,
     initialData?: ShapesWithoutId,
     onClose: () => void,
 }
 
 export const NewShapeForm = (props: NewShapeFormProps) => {
-    const { data, changeType, onSubmit } = useNewShapeForm({ initialData: props.initialData })
+    const { data, changeType, onSubmit } = useNewShapeForm({
+        initialData: props.initialData,
+        onSubmit: props.onSubmit,
+    })
 
     return (
         <form className={Styles.form} onSubmit={onSubmit}>

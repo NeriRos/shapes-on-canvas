@@ -37,5 +37,5 @@ export const CanvasClickListener = (props: CanvasClickListenerProps) => {
         }
     }, [])
 
-    return <></>
+    return null
 }
