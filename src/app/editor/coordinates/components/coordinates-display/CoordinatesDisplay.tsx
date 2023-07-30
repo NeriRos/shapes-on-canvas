@@ -3,7 +3,7 @@ import {
 } from "@/editor/canvas/modules/gestures-detector/components/ShapeMouseMovementListener"
 import Styles from "./CoordinatesDisplay.module.css"
 import { useState } from "react"
-import { Shape } from "@/editor/canvas/components/shape/Shape"
+import { Shape } from "@/editor/canvas/types/Shape"
 import { TEXTS } from "@/editor/coordinates/components/coordinates-display/consts"
 
 export type CoordinatesDisplayProps = {}

@@ -1,4 +1,4 @@
-import { Shape } from "@/editor/canvas/components/shape/Shape"
+import { Shape } from "@/editor/canvas/types/Shape"
 
 export type RectangleShape = {
     type: "rectangle"

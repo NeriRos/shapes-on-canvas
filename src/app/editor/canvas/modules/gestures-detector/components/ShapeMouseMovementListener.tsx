@@ -1,6 +1,6 @@
 "use client"
 
-import { Shape } from "@/editor/canvas/components/shape/Shape"
+import { Shape } from "@/editor/canvas/types/Shape"
 import { useCanvas } from "@/editor/canvas/context"
 import { MouseEvent, useEffect, useRef } from "react"
 

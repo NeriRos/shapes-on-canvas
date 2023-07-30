@@ -1,3 +1,8 @@
+export type Position = {
+    x: number,
+    y: number
+}
+
 export type Shape = {
     id: string
     title: string
@@ -7,8 +12,5 @@ export type Shape = {
         height: number
     }
     color?: string
-    position: {
-        x: number
-        y: number
-    }
+    position: Position
 };
