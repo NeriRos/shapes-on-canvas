@@ -10,8 +10,10 @@ import { POPUP_NEW_SHAPE_FORM, useView } from "@/app/view/context"
 import { CloseButton } from "@/core/components/button"
 import { DEFAULT_SHAPE } from "@/editor/canvas/modules/shapes/consts"
 import { Position } from "@/editor/canvas/types/Shape"
+import { useCanvas } from "@/editor/canvas/context"
 
-export const NewShapeFormContainer = (props: { listenToCanvasClick?: boolean }) => {
+export const NewShapeFormContainer = (props: { newShapeOnDoubleClick?: boolean }) => {
+    const { addShape } = useCanvas()
     const [shape, setShape] = useState<ShapesWithoutId>()
     const { togglePopup, popupView } = useView()
 
@@ -36,6 +38,12 @@ export const NewShapeFormContainer = (props: { listenToCanvasClick?: boolean }) 
         togglePopup(null)
     }
 
+    const createNewShape = (position: Position) => {
+        const newShape = DEFAULT_SHAPE
+        newShape.position = position
+        addShape(newShape)
+    }
+
     const showPopup = popupView == POPUP_NEW_SHAPE_FORM
 
     return (
@@ -45,7 +53,7 @@ export const NewShapeFormContainer = (props: { listenToCanvasClick?: boolean }) 
 
                 {showPopup ? <NewShapeForm onSubmit={onSubmit} initialData={shape} /> : null}
 
-                {props.listenToCanvasClick ? <MouseListener onClick={showForm} /> : null}
+                {props.newShapeOnDoubleClick ? <MouseListener onDoubleClick={createNewShape} /> : null}
             </div>
         </div>
     )

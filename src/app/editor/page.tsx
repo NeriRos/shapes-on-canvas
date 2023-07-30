@@ -5,12 +5,13 @@ import { NewShapeFormContainer } from "@/editor/canvas/modules/new-shape-form/co
 import { ViewProvider } from "@/app/view/context/ViewProvider"
 import { SCREEN_EDITOR } from "@/app/view/context"
 import { DragShapes } from "@/editor/canvas/modules/drag-shapes/DragShapes"
+import { MouseListener } from "@/editor/canvas/modules/gestures-detector/components/MouseListener"
 
 export default function Page() {
     return <ViewProvider screen={SCREEN_EDITOR}>
         <CanvasContainer>
             <FloatingMenu />
-            <NewShapeFormContainer />
+            <NewShapeFormContainer newShapeOnDoubleClick={true} />
             <DragShapes />
         </CanvasContainer>
     </ViewProvider>
