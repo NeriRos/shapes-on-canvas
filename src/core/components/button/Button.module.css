@@ -1,0 +1,21 @@
+.button {
+    background-color: var(--red, #eb5757);
+    border-radius: 100px;
+    min-height: 48px;
+    flex-shrink: 0;
+    border: none;
+    cursor: pointer;
+
+    color: var(--solid-white, #fff);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 22px;
+    text-align: center;
+
+    width: auto;
+}
+
+
+.button[type="submit"] {
+    background: var(--solid-brand-brand-700, #0948EA);
+}

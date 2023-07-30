@@ -4,13 +4,12 @@ import { CanvasClickListener } from "@/editor/canvas/modules/gestures-detector/c
 import React, { MouseEvent, useState } from "react"
 import { ShapesWithoutId } from "@/editor/canvas/modules/shapes/types"
 import { NewShapeForm } from "@/editor/canvas/modules/new-shape-form/components/NewShapeForm"
-import Styles from "./NewShapeForm.module.css"
+import Styles from "./NewShapeFormContainer.module.css"
 import clsx from "clsx"
-import { useCanvas } from "@/editor/canvas/context"
 import { POPUP_NEW_SHAPE_FORM, useView } from "@/app/view/context"
+import { CloseButton } from "@/core/components/button"
 
 export const NewShapeFormContainer = (props: { listenToCanvasClick?: boolean }) => {
-    const { addShape } = useCanvas()
     const [shape, setShape] = useState<ShapesWithoutId>()
     const { togglePopup, popupView } = useView()
 
@@ -33,21 +32,17 @@ export const NewShapeFormContainer = (props: { listenToCanvasClick?: boolean }) 
         togglePopup(null)
     }
 
-    const show = popupView == POPUP_NEW_SHAPE_FORM
+    const showPopup = popupView == POPUP_NEW_SHAPE_FORM
 
     return (
-        <div className={clsx([Styles.formContainer, show && Styles.active])} onClick={handleOutsideClick}>
-            {show ?
-                <NewShapeForm onClose={close} onSubmit={onSubmit} initialData={shape} /> : null}
-            {props.listenToCanvasClick ? <CanvasClickListener action={showForm} shape={{
-                title: "",
-                type: "rectangle",
-                color: "red",
-                attributes: {
-                    width: 120,
-                    height: 120,
-                },
-            }} /> : null}
+        <div className={clsx([Styles.formContainer, showPopup && Styles.active])} onClick={handleOutsideClick}>
+            <div className={Styles.content}>
+                <CloseButton className={Styles.closeButton} onClick={close} />
+
+                {showPopup ? <NewShapeForm onSubmit={onSubmit} initialData={shape} /> : null}
+
+                {props.listenToCanvasClick ? <CanvasClickListener action={showForm} /> : null}
+            </div>
         </div>
     )
 }

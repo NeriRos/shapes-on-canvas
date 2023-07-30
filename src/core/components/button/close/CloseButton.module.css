@@ -1,0 +1,26 @@
+.button {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    background-color: transparent;
+    border: none;
+}
+
+.content {
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.button :global(svg) {
+    cursor: pointer;
+    width: inherit;
+    height: inherit;
+    position: absolute;
+    fill: var(--solid-grey-grey-200, #F7F8F9);
+    stroke-width: 1px;
+    stroke: var(--solid-grey-grey-300, #F1F2F4);
+}
