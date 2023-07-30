@@ -8,7 +8,6 @@ import { Button } from "@/core/components/button"
 export type NewShapeFormProps = {
     onSubmit: () => void,
     initialData?: ShapesWithoutId,
-    onClose: () => void,
 }
 
 export const NewShapeForm = (props: NewShapeFormProps) => {
@@ -26,7 +25,6 @@ export const NewShapeForm = (props: NewShapeFormProps) => {
 
     return (
         <form className={Styles.form} onSubmit={onSubmit}>
-            <button className={Styles.closeButton} onClick={props.onClose}>Close</button>
             <label>
                 <span>Title</span>
                 <input type="text" name="title" defaultValue={data?.title} />
