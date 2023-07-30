@@ -37,10 +37,8 @@ export const DragShapes = () => {
         setDraggedShape(newShape)
     }
 
-    const onMouseUp = (position: Position) => {
-        console.log("mouse up", position)
-
-        if (draggedShape === undefined) return
+    const onMouseUp = () => {
+        if (!draggedShape?.isDragging) return
 
         updateShape({
             ...draggedShape,

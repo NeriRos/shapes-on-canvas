@@ -10,12 +10,12 @@ export type ButtonProps = {
 }
 
 export const Button = ({
-    children,
-    onClick,
-    className,
-    disabled,
-    type = "button",
-}: ButtonProps) => {
+                           children,
+                           onClick,
+                           className,
+                           disabled,
+                           type = "button",
+                       }: ButtonProps) => {
     return (
         <button
             className={clsx([className, Styles.button])}
