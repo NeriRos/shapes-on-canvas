@@ -13,7 +13,7 @@ export const CanvasElement = forwardRef<HTMLCanvasElement>(function Canvas(props
 
         if (Component === undefined) return null
 
-        return <Component key={index} shape={shape} redraw={redrawTimes} />
+        return <Component key={index} shape={shape} redrawTimes={redrawTimes} />
     }), [shapes, redrawTimes])
 
     return <canvas ref={ref} width={width} height={height} className={styles.canvas}>
