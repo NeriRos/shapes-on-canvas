@@ -8,13 +8,17 @@ import Styles from "./NewShapeFormContainer.module.css"
 import clsx from "clsx"
 import { POPUP_NEW_SHAPE_FORM, useView } from "@/app/view/context"
 import { CloseButton } from "@/core/components/button"
+import { DEFAULT_SHAPE } from "@/editor/canvas/modules/shapes/consts"
+import { Position } from "@/editor/canvas/types/Shape"
 
 export const NewShapeFormContainer = (props: { listenToCanvasClick?: boolean }) => {
     const [shape, setShape] = useState<ShapesWithoutId>()
     const { togglePopup, popupView } = useView()
 
-    const showForm = (shape: ShapesWithoutId) => {
-        setShape(shape)
+    const showForm = (position: Position) => {
+        const newShape = DEFAULT_SHAPE
+        newShape.position = position
+        setShape(newShape)
         togglePopup(POPUP_NEW_SHAPE_FORM, true)
     }
 
@@ -41,7 +45,7 @@ export const NewShapeFormContainer = (props: { listenToCanvasClick?: boolean }) 
 
                 {showPopup ? <NewShapeForm onSubmit={onSubmit} initialData={shape} /> : null}
 
-                {props.listenToCanvasClick ? <CanvasClickListener action={showForm} /> : null}
+                {props.listenToCanvasClick ? <CanvasClickListener onClick={showForm} /> : null}
             </div>
         </div>
     )
