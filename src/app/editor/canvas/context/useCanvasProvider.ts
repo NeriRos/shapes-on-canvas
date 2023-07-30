@@ -6,6 +6,7 @@ import { Shapes, ShapesWithoutId } from "@/editor/canvas/modules/shapes/types"
 export type CanvasProviderData = {
     shapes: Shapes[]
     addShape: (item: ShapesWithoutId) => void
+    updateShape: (item: Shapes) => void
     removeShape: (id: string) => void
     ref: RefObject<HTMLCanvasElement>
 }
@@ -27,12 +28,17 @@ export const useCanvasProvider = (props: CanvasProviderHookProps): CanvasProvide
     }
 
     const removeShape = (id: string) => {
-        setShapes((items) => items.filter((item) => item.id !== id))
+        setShapes((items) => [...items.filter((item) => item.id !== id)])
+    }
+
+    const updateShape = (item: Shapes) => {
+        setShapes((items) => [...items.map((i) => i.id === item.id ? item : i)])
     }
 
     return {
         shapes,
         addShape,
+        updateShape,
         removeShape,
         ref: props.ref,
     }
