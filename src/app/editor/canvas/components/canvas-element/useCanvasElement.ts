@@ -1,11 +1,11 @@
 import { useCanvas } from "@/editor/canvas/context"
-import { useElementDimensions } from "@/core/hooks/useElementDimensions"
+import { useWindowDimensions } from "@/core/hooks/useWindowDimensions"
 import { useEffect, useState } from "react"
 import { REDRAW_MILLISECONDS } from "@/editor/canvas/components/canvas-element/consts"
 
 export const useCanvasElement = () => {
     const { shapes } = useCanvas()
-    const { width, height } = useElementDimensions(window)
+    const { width, height } = useWindowDimensions()
     const [redrawTimes, setRedrawTimes] = useState(0)
 
     useEffect(() => {

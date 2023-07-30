@@ -1,14 +1,15 @@
 "use client"
 
-import { RectangleShape } from "@/editor/canvas/modules/shapes/components/rectangle/RectangleShape"
+import { RectangleShape } from "@/editor/canvas/modules/shapes/components/rectangle/types"
 import { useShape } from "@/editor/canvas/modules/shapes/hooks/useShape"
 import { useCallback } from "react"
 
 export type RectangleProps = {
-    shape: RectangleShape
+    shape: RectangleShape,
+    redrawTimes?: number,
 }
 
-export const Rectangle = ({ shape }: RectangleProps) => {
+export const Rectangle = ({ shape, redrawTimes }: RectangleProps) => {
     const draw = useCallback((context: CanvasRenderingContext2D) => {
         if (shape.color)
             context.fillStyle = shape.color
@@ -18,6 +19,7 @@ export const Rectangle = ({ shape }: RectangleProps) => {
     useShape({
         shape,
         draw,
+        redrawTimes,
     })
 
     return null
