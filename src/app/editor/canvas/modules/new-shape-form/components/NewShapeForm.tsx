@@ -3,6 +3,7 @@ import { ShapesWithoutId } from "@/editor/canvas/modules/shapes/types"
 import Styles from "./NewShapeForm.module.css"
 import { ShapesToComponentMap } from "@/editor/canvas/modules/shapes/ShapesToComponentMap"
 import { useNewShapeForm } from "@/editor/canvas/modules/new-shape-form/components/useNewShapeForm"
+import { Button } from "@/core/components/button"
 
 export type NewShapeFormProps = {
     onSubmit: () => void,
@@ -57,9 +58,9 @@ export const NewShapeForm = (props: NewShapeFormProps) => {
                     <input type="number" name="y" defaultValue={data?.position?.y} />
                 </label>
             </div>
-            <button type={"submit"}>
+            <Button type={"submit"}>
                 Add
-            </button>
+            </Button>
         </form>
     )
 }
