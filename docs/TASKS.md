@@ -62,7 +62,6 @@ Also, the points should show as integers.
 
 **Tasks**
 
-- [ ] Cre ate a mouse coordinates context provider
-- [ ] Create the mouse coordinates component
-- [ ] Register mouse move listener on shape
-- [ ] Calculate mouse coordinates relative to shape
+- [x] Create the mouse coordinates component
+- [x] Register mouse move listener
+- [x] Calculate mouse coordinates relative to shape

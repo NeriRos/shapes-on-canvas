@@ -1,4 +1,4 @@
-import { ShapesToComponentMap } from "@/editor/canvas/modules/shapes/ShapesToComponentMap"
+import { ShapesToComponentMap } from "@/editor/canvas/modules/shapes/utils/ShapesToComponentMap"
 import { Shapes } from "@/editor/canvas/modules/shapes/types"
 
 export type NewShapeFormData = {
