@@ -1,8 +1,8 @@
 "use client"
 
-import React from "react"
-import styles from "./FloatingMenu.module.css"
 import { POPUP_NEW_SHAPE_FORM, useView } from "@/app/view/context"
+import { Button } from "@/core/components/button"
+import styles from "./FloatingMenu.module.css"
 
 export const FloatingMenu = () => {
     const { togglePopup } = useView()
@@ -11,9 +11,9 @@ export const FloatingMenu = () => {
         togglePopup(POPUP_NEW_SHAPE_FORM)
     }
 
-    return <div className={styles.container}>
-        <button onClick={add}>
-            Add Shape
-        </button>
-    </div>
+    return (
+        <div className={styles.container}>
+            <Button onClick={add}>+ Add a Shape</Button>
+        </div>
+    )
 }
