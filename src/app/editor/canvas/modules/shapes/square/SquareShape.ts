@@ -3,6 +3,6 @@ import { Shape } from "@/editor/canvas/components/shape/Shape"
 export type SquareShape = {
     type: "square"
     attributes: {
-        size: number
-    }
+        size: number,
+    } & Shape["attributes"]
 } & Shape;

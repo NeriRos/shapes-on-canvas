@@ -17,7 +17,8 @@ export const useNewShapeForm = (props: {
             y: 0,
         },
         attributes: {
-            size: 100,
+            width: 100,
+            height: 100,
         },
     })
 
@@ -57,12 +58,14 @@ export const useNewShapeForm = (props: {
     const setAttribute = (data: Pick<Shapes, "type" | "attributes">) => {
         if (isSquareShape(data)) {
             data.attributes = {
-                size: data.attributes.size ? data.attributes.size : 100,
+                size: data.attributes.width ? Number(data.attributes.width) : 100,
+                width: data.attributes.width ? Number(data.attributes.width) : 100,
+                height: data.attributes.height ? Number(data.attributes.height) : 100,
             }
         } else if (isRectangleShape(data)) {
             data.attributes = {
-                width: data.attributes.width ? data.attributes.width : 100,
-                height: data.attributes.height ? data.attributes.height : 100,
+                width: data.attributes.width ? Number(data.attributes.width) : 100,
+                height: data.attributes.height ? Number(data.attributes.height) : 100,
             }
         }
 

@@ -2,8 +2,11 @@ export type Shape = {
     id: string
     title: string
     type: string
+    attributes: {
+        width: number
+        height: number
+    }
     color?: string
-    attributes?: {}
     position: {
         x: number
         y: number

@@ -45,7 +45,8 @@ export const NewShapeFormContainer = (props: { listenToCanvasClick?: boolean }) 
                 type: "square",
                 color: "red",
                 attributes: {
-                    size: 120,
+                    width: 120,
+                    height: 120,
                 },
             }} /> : null}
         </div>
