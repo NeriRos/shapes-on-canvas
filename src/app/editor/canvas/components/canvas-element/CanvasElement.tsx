@@ -5,7 +5,7 @@ import { forwardRef, useMemo } from "react"
 import { ShapesToComponentMap } from "@/editor/canvas/modules/shapes/ShapesToComponentMap"
 import { useCanvasElement } from "@/editor/canvas/components/canvas-element/useCanvasElement"
 
-export const CanvasElement = forwardRef<HTMLCanvasElement>((props, ref) => {
+export const CanvasElement = forwardRef<HTMLCanvasElement>(function Canvas(props, ref) {
     const { shapes, width, height, redrawTimes } = useCanvasElement()
 
     const shapesNodes = useMemo(() => shapes?.map((shape, index) => {

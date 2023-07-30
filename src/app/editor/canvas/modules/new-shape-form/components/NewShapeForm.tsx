@@ -40,11 +40,17 @@ export const NewShapeForm = (props: NewShapeFormProps) => {
             </label> : <input type="hidden" name="type" defaultValue={data?.type} />}
             <div className={Styles.row}>
                 {Object.keys(data?.attributes || {}).map((key) => {
+                    const keyUpper = key.toUpperCase() as keyof typeof TEXTS.FIELDS.ATTRIBUTES
+                    const attribute = TEXTS.FIELDS.ATTRIBUTES[keyUpper]
+                    if (!attribute) {
+                        return null
+                    }
+
                     return (
                         <label key={key}>
-                            <span>{TEXTS.FIELDS.ATTRIBUTES[key.toUpperCase()]?.LABEL}</span>
+                            <span>{attribute.LABEL}</span>
                             <input required type="number" name={key}
-                                   placeholder={TEXTS.FIELDS.ATTRIBUTES[key.toUpperCase()]?.PLACEHOLDER}
+                                   placeholder={attribute.PLACEHOLDER}
                                    defaultValue={(data as any).attributes[key]} />
                         </label>
                     )

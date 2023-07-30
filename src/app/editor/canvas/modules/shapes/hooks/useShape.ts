@@ -4,11 +4,10 @@ import { Shapes } from "@/editor/canvas/modules/shapes/types"
 
 export type ShapeHookProps = {
     draw: (context: CanvasRenderingContext2D) => void,
-    shape: Shapes,
-    redrawTimes: number
+    shape: Shapes
 }
 
-export const useShape = ({ draw, redrawTimes, shape }: ShapeHookProps) => {
+export const useShape = ({ draw, shape }: ShapeHookProps) => {
     const canvas = useCanvas()
     const [context, setContext] = useState<CanvasRenderingContext2D>()
 
@@ -18,15 +17,27 @@ export const useShape = ({ draw, redrawTimes, shape }: ShapeHookProps) => {
 
     useEffect(() => {
         const context = canvas?.ref.current?.getContext("2d")
-        if (context)
-            setContext(context)
-    }, [redrawTimes])
+        if (!context) return
+
+        setContext(context)
+    }, [canvas?.ref])
 
     useEffect(() => {
-        if (context) {
-            draw(context)
+        if (!context) return
+
+        draw(context)
+    }, [context, draw])
+
+    useEffect(() => {
+        if (context && shape.isDragging) {
+            context.clearRect(
+                shape.position.x,
+                shape.position.y,
+                shape.attributes.width,
+                shape.attributes.height,
+            )
         }
-    }, [context, redrawTimes])
+    }, [context, draw, shape])
 
     return {
         fillColor,

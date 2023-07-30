@@ -1,6 +1,6 @@
 "use client"
 
-import { CanvasClickListener } from "@/editor/canvas/modules/gestures-detector/components/CanvasClickListener"
+import { MouseListener } from "@/editor/canvas/modules/gestures-detector/components/MouseListener"
 import React, { MouseEvent, useState } from "react"
 import { ShapesWithoutId } from "@/editor/canvas/modules/shapes/types"
 import { NewShapeForm } from "@/editor/canvas/modules/new-shape-form/components/NewShapeForm"
@@ -8,13 +8,19 @@ import Styles from "./NewShapeFormContainer.module.css"
 import clsx from "clsx"
 import { POPUP_NEW_SHAPE_FORM, useView } from "@/app/view/context"
 import { CloseButton } from "@/core/components/button"
+import { DEFAULT_SHAPE } from "@/editor/canvas/modules/shapes/consts"
+import { Position } from "@/editor/canvas/types/Shape"
+import { useCanvas } from "@/editor/canvas/context"
 
-export const NewShapeFormContainer = (props: { listenToCanvasClick?: boolean }) => {
+export const NewShapeFormContainer = (props: { newShapeOnDoubleClick?: boolean }) => {
+    const { addShape } = useCanvas()
     const [shape, setShape] = useState<ShapesWithoutId>()
     const { togglePopup, popupView } = useView()
 
-    const showForm = (shape: ShapesWithoutId) => {
-        setShape(shape)
+    const showForm = (position: Position) => {
+        const newShape = DEFAULT_SHAPE
+        newShape.position = position
+        setShape(newShape)
         togglePopup(POPUP_NEW_SHAPE_FORM, true)
     }
 
@@ -32,6 +38,12 @@ export const NewShapeFormContainer = (props: { listenToCanvasClick?: boolean }) 
         togglePopup(null)
     }
 
+    const createNewShape = (position: Position) => {
+        const newShape = DEFAULT_SHAPE
+        newShape.position = position
+        addShape(newShape)
+    }
+
     const showPopup = popupView == POPUP_NEW_SHAPE_FORM
 
     return (
@@ -41,7 +53,7 @@ export const NewShapeFormContainer = (props: { listenToCanvasClick?: boolean }) 
 
                 {showPopup ? <NewShapeForm onSubmit={onSubmit} initialData={shape} /> : null}
 
-                {props.listenToCanvasClick ? <CanvasClickListener action={showForm} /> : null}
+                {props.newShapeOnDoubleClick ? <MouseListener onDoubleClick={createNewShape} /> : null}
             </div>
         </div>
     )

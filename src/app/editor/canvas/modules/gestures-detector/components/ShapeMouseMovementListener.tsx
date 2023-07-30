@@ -1,8 +1,9 @@
 "use client"
 
-import { Shape } from "@/editor/canvas/components/shape/Shape"
+import { Position, Shape } from "@/editor/canvas/types/Shape"
 import { useCanvas } from "@/editor/canvas/context"
-import { MouseEvent, useEffect, useRef } from "react"
+import { useRef } from "react"
+import { MouseListener } from "@/editor/canvas/modules/gestures-detector/components/MouseListener"
 
 export type MouseMoveListenerProps = {
     onMove: (x: number, y: number) => void
@@ -11,15 +12,12 @@ export type MouseMoveListenerProps = {
 }
 
 export const ShapeMouseMovementListener = (props: MouseMoveListenerProps) => {
-    const { ref, shapes } = useCanvas()
+    const { shapes } = useCanvas()
     const prevShapeId = useRef<string>()
 
-    const onMove = (e: MouseEvent) => {
-        let rect = ref.current?.getBoundingClientRect()
-        if (rect === undefined) throw new Error("Canvas ref is undefined")
-
-        const mouseX = e.clientX - rect.left
-        const mouseY = e.clientY - rect.top
+    const onMove = (position: Position) => {
+        const mouseX = position.x
+        const mouseY = position.y
 
         let hoveredOnShape = false
 
@@ -51,15 +49,5 @@ export const ShapeMouseMovementListener = (props: MouseMoveListenerProps) => {
         }
     }
 
-    useEffect(() => {
-        // @ts-ignore
-        ref.current?.addEventListener("mousemove", onMove)
-
-        return () => {
-            // @ts-ignore
-            ref.current?.removeEventListener("mousemove", onMove)
-        }
-    }, [shapes])
-
-    return null
+    return <MouseListener onMouseMove={onMove} />
 }
