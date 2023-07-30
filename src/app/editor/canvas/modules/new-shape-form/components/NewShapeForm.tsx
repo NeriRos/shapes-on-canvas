@@ -1,7 +1,7 @@
 import React from "react"
 import { ShapesWithoutId } from "@/editor/canvas/modules/shapes/types"
 import Styles from "./NewShapeForm.module.css"
-import { ShapesToComponentMap } from "@/editor/canvas/modules/shapes/ShapesToComponentMap"
+import { ShapesToComponentMap } from "@/editor/canvas/modules/shapes/utils/ShapesToComponentMap"
 import { useNewShapeForm } from "@/editor/canvas/modules/new-shape-form/components/useNewShapeForm"
 import { Button } from "@/core/components/button"
 import { TEXTS } from "@/editor/canvas/modules/new-shape-form/components/consts"

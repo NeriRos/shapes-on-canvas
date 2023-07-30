@@ -2,7 +2,7 @@
 
 import styles from "./CanvasElement.module.css"
 import { forwardRef, useMemo } from "react"
-import { ShapesToComponentMap } from "@/editor/canvas/modules/shapes/ShapesToComponentMap"
+import { ShapesToComponentMap } from "@/editor/canvas/modules/shapes/utils/ShapesToComponentMap"
 import { useCanvasElement } from "@/editor/canvas/components/canvas-element/useCanvasElement"
 
 export const CanvasElement = forwardRef<HTMLCanvasElement>(function Canvas(props, ref) {

@@ -1,6 +1,6 @@
 import React from "react"
 import { Shapes, ShapesWithoutId } from "@/editor/canvas/modules/shapes/types"
-import { isRectangleShape, SHAPE_TYPE_RECTANGLE } from "@/editor/canvas/modules/shapes/rectangle/consts"
+import { isRectangleShape, SHAPE_TYPE_RECTANGLE } from "@/editor/canvas/modules/shapes/components/rectangle/consts"
 import { useCanvas } from "@/editor/canvas/context"
 import { DEFAULT_SHAPE_COLOR } from "@/editor/canvas/modules/shapes/consts"
 

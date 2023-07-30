@@ -1,6 +1,6 @@
 "use client"
 
-import { RectangleShape } from "@/editor/canvas/modules/shapes/rectangle/RectangleShape"
+import { RectangleShape } from "@/editor/canvas/modules/shapes/components/rectangle/RectangleShape"
 import { useShape } from "@/editor/canvas/modules/shapes/hooks/useShape"
 import { useCallback } from "react"
 

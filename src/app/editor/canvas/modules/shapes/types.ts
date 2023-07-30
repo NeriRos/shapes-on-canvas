@@ -1,4 +1,4 @@
-import { RectangleShape } from "@/editor/canvas/modules/shapes/rectangle"
+import { RectangleShape } from "src/app/editor/canvas/modules/shapes/components/rectangle"
 
 export type Shapes = RectangleShape
 export type ShapesWithoutId = Omit<Shapes, "id">

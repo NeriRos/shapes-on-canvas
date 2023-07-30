@@ -1,5 +1,5 @@
-import { Rectangle } from "@/editor/canvas/modules/shapes/rectangle"
-import { SHAPE_TYPE_RECTANGLE } from "@/editor/canvas/modules/shapes/rectangle/consts"
+import { Rectangle } from "@/editor/canvas/modules/shapes/components/rectangle"
+import { SHAPE_TYPE_RECTANGLE } from "@/editor/canvas/modules/shapes/components/rectangle/consts"
 import React from "react"
 
 
