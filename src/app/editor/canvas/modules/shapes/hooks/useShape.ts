@@ -29,15 +29,28 @@ export const useShape = ({ draw, shape }: ShapeHookProps) => {
     }, [context, draw])
 
     useEffect(() => {
-        if (context && shape.isDragging) {
-            context.clearRect(
-                shape.position.x,
-                shape.position.y,
-                shape.attributes.width,
-                shape.attributes.height,
-            )
-        }
+        if (!(context && shape.isDragging)) return
+
+        context.clearRect(
+            shape.position.x,
+            shape.position.y,
+            shape.attributes.width,
+            shape.attributes.height,
+        )
     }, [context, draw, shape])
+
+    useEffect(() => {
+        if (!(context && !shape.isDragging)) return
+
+        context.clearRect(
+            shape.position.x,
+            shape.position.y,
+            shape.attributes.width,
+            shape.attributes.height,
+        )
+
+        draw(context)
+    }, [context, draw, shape, canvas.shapes])
 
     return {
         fillColor,
