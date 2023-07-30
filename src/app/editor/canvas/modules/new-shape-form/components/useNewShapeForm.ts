@@ -1,8 +1,8 @@
 import React from "react"
 import { Shapes, ShapesWithoutId } from "@/editor/canvas/modules/shapes/types"
-import { isSquareShape, SHAPE_TYPE_SQUARE } from "@/editor/canvas/modules/shapes/square/consts"
-import { isRectangleShape } from "@/editor/canvas/modules/shapes/rectangle/consts"
+import { isRectangleShape, SHAPE_TYPE_RECTANGLE } from "@/editor/canvas/modules/shapes/rectangle/consts"
 import { useCanvas } from "@/editor/canvas/context"
+import { DEFAULT_SHAPE_COLOR } from "@/editor/canvas/modules/shapes/consts"
 
 export const useNewShapeForm = (props: {
     initialData?: ShapesWithoutId,
@@ -10,8 +10,8 @@ export const useNewShapeForm = (props: {
 }) => {
     const { addShape } = useCanvas()
     const [data, setData] = React.useState<ShapesWithoutId>(props.initialData || {
-        type: SHAPE_TYPE_SQUARE,
-        color: "#000000",
+        type: SHAPE_TYPE_RECTANGLE,
+        color: DEFAULT_SHAPE_COLOR,
         title: "",
         position: {
             x: 0,
@@ -31,7 +31,7 @@ export const useNewShapeForm = (props: {
 
         const shape: ShapesWithoutId = {
             type: data.type,
-            color: data.color,
+            color: data.color || DEFAULT_SHAPE_COLOR,
             position: {
                 x: parseInt(data.x),
                 y: parseInt(data.y),
@@ -58,13 +58,7 @@ export const useNewShapeForm = (props: {
     }
 
     const setAttribute = (data: Pick<Shapes, "type" | "attributes">) => {
-        if (isSquareShape(data)) {
-            data.attributes = {
-                size: data.attributes.width ? Number(data.attributes.width) : 100,
-                width: data.attributes.width ? Number(data.attributes.width) : 100,
-                height: data.attributes.height ? Number(data.attributes.height) : 100,
-            }
-        } else if (isRectangleShape(data)) {
+        if (isRectangleShape(data)) {
             data.attributes = {
                 width: data.attributes.width ? Number(data.attributes.width) : 100,
                 height: data.attributes.height ? Number(data.attributes.height) : 100,

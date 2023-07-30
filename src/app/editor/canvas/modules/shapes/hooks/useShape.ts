@@ -1,12 +1,14 @@
 import { useCanvas } from "@/editor/canvas/context"
 import { useEffect, useState } from "react"
+import { Shapes } from "@/editor/canvas/modules/shapes/types"
 
 export type ShapeHookProps = {
     draw: (context: CanvasRenderingContext2D) => void,
+    shape: Shapes,
     redrawTimes: number
 }
 
-export const useShape = ({ draw, redrawTimes }: ShapeHookProps) => {
+export const useShape = ({ draw, redrawTimes, shape }: ShapeHookProps) => {
     const canvas = useCanvas()
     const [context, setContext] = useState<CanvasRenderingContext2D>()
 

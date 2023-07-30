@@ -1,0 +1,1 @@
+export const DEFAULT_SHAPE_COLOR = "rgba(9, 72, 234, 0.20)";

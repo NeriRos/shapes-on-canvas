@@ -41,7 +41,7 @@ export const NewShapeFormContainer = (props: { listenToCanvasClick?: boolean }) 
                 <NewShapeForm onClose={close} onSubmit={onSubmit} initialData={shape} /> : null}
             {props.listenToCanvasClick ? <CanvasClickListener action={showForm} shape={{
                 title: "",
-                type: "square",
+                type: "rectangle",
                 color: "red",
                 attributes: {
                     width: 120,
