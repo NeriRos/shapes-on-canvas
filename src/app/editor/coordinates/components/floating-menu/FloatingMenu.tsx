@@ -2,22 +2,13 @@
 
 import React from "react"
 import styles from "./FloatingMenu.module.css"
-import { SQUARE_SHAPE_TYPE } from "@/editor/canvas/modules/shapes/square"
-import { useCanvas } from "@/editor/canvas/context"
+import { POPUP_NEW_SHAPE_FORM, useView } from "@/app/view/context"
 
-export type FloatingMenuProps = {}
-
-export const FloatingMenu = (props: FloatingMenuProps) => {
-    const { addShape } = useCanvas()
+export const FloatingMenu = () => {
+    const { togglePopup } = useView()
 
     const add = () => {
-        addShape({
-            type: SQUARE_SHAPE_TYPE,
-            position: { x: 20, y: 20 },
-            color: "blue",
-            attributes: { size: 20 },
-            id: 2,
-        })
+        togglePopup(POPUP_NEW_SHAPE_FORM)
     }
 
     return <div className={styles.container}>

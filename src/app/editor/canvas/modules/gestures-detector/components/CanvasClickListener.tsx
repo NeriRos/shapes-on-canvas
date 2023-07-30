@@ -2,33 +2,37 @@
 
 import { useCanvas } from "@/editor/canvas/context"
 import { MouseEvent, useEffect } from "react"
-import { Shapes } from "@/editor/canvas/modules/shapes/Shapes"
+import { ShapesWithoutId } from "@/editor/canvas/modules/shapes/types"
 
 export type CanvasClickListenerProps = {
-    shape: Omit<Shapes, "id" | "position">,
+    shape: Omit<ShapesWithoutId, "position">,
+    action: (shape: ShapesWithoutId) => void
 }
 
 export const CanvasClickListener = (props: CanvasClickListenerProps) => {
     const { ref, addShape } = useCanvas()
 
     const onClick = (e: MouseEvent) => {
-        let rect = ref.current.getBoundingClientRect()
-        let x = e.clientX - rect.left
-        let y = e.clientY - rect.top
+        let rect = ref.current?.getBoundingClientRect()
+        if (rect === undefined) throw new Error("Canvas ref is undefined")
 
-        addShape({
+        const shape: ShapesWithoutId = {
             ...props.shape,
             position: {
-                x,
-                y,
+                x: e.clientX - rect.left,
+                y: e.clientY - rect.top,
             },
-        })
+        }
+
+        props.action(shape)
     }
 
     useEffect(() => {
+        // @ts-ignore
         ref.current?.addEventListener("click", onClick)
 
         return () => {
+            // @ts-ignore
             ref.current?.removeEventListener("click", onClick)
         }
     }, [])

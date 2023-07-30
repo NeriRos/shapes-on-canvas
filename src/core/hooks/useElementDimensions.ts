@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-export const useElementDimensions = (element: HTMLElement) => {
+export const useElementDimensions = (element: Window) => {
     const [elementDimensions, setElementDimensions] = useState({
         width: element.innerWidth,
         height: element.innerHeight,
