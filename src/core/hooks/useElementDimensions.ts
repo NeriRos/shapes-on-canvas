@@ -20,7 +20,7 @@ export const useElementDimensions = (element: Window) => {
         return () => {
             element.removeEventListener("resize", handleResize)
         }
-    }, []) // Empty dependency array to ensure the effect runs only once
+    }, [element]) // Empty dependency array to ensure the effect runs only once
 
     return elementDimensions
 }
