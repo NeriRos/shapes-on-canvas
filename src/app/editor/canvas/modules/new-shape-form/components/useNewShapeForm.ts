@@ -3,7 +3,6 @@ import { Shapes, ShapesWithoutId } from "@/editor/canvas/modules/shapes/types"
 import { isRectangleShape, SHAPE_TYPE_RECTANGLE } from "@/editor/canvas/modules/shapes/rectangle/consts"
 import { useCanvas } from "@/editor/canvas/context"
 import { DEFAULT_SHAPE_COLOR } from "@/editor/canvas/modules/shapes/consts"
-import { isSquareShape } from "@/editor/canvas/modules/shapes/square/consts"
 
 export const useNewShapeForm = (props: {
     initialData?: ShapesWithoutId,
@@ -59,13 +58,7 @@ export const useNewShapeForm = (props: {
     }
 
     const setAttribute = (data: Pick<Shapes, "type" | "attributes">) => {
-        if (isSquareShape(data)) {
-            data.attributes = {
-                size: data.attributes.width ? Number(data.attributes.width) : 100,
-                width: data.attributes.width ? Number(data.attributes.width) : 100,
-                height: data.attributes.height ? Number(data.attributes.height) : 100,
-            }
-        } else if (isRectangleShape(data)) {
+        if (isRectangleShape(data)) {
             data.attributes = {
                 width: data.attributes.width ? Number(data.attributes.width) : 100,
                 height: data.attributes.height ? Number(data.attributes.height) : 100,
