@@ -1,0 +1,1 @@
+export const REDRAW_MILLISECONDS = 300

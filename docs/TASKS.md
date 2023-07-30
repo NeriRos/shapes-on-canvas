@@ -21,9 +21,9 @@ The canvas to display the shapes.
 
 **Tasks**
 
-- [ ] Create a canvas context provider
-- [ ] Create the canvas component
-- [ ] Create a shape model
+- [x] Create a canvas context provider
+- [x] Create the canvas component
+- [x] Create a shape model
 
 **Notes**
 
