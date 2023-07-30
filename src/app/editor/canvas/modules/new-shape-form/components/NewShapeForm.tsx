@@ -4,6 +4,7 @@ import Styles from "./NewShapeForm.module.css"
 import { ShapesToComponentMap } from "@/editor/canvas/modules/shapes/ShapesToComponentMap"
 import { useNewShapeForm } from "@/editor/canvas/modules/new-shape-form/components/useNewShapeForm"
 import { Button } from "@/core/components/button"
+import { TEXTS } from "@/editor/canvas/modules/new-shape-form/components/consts"
 
 export type NewShapeFormProps = {
     onSubmit: () => void,
@@ -26,12 +27,13 @@ export const NewShapeForm = (props: NewShapeFormProps) => {
     return (
         <form className={Styles.form} onSubmit={onSubmit}>
             <label>
-                <span>Title</span>
-                <input type="text" name="title" defaultValue={data?.title} />
+                <span>{TEXTS.FIELDS.TITLE.LABEL}</span>
+                <input required type="text" name="title" defaultValue={data?.title}
+                       placeholder={TEXTS.FIELDS.TITLE.PLACEHOLDER} />
             </label>
             {shapes.length > 1 ? <label>
-                <span>Type</span>
-                <select name={"type"} defaultValue={data?.type} onChange={changeType}>
+                <span>{TEXTS.FIELDS.TYPE.LABEL}</span>
+                <select required name={"type"} defaultValue={data?.type} onChange={changeType}>
                     {shapes.map((shape) =>
                         <option key={shape.key} value={shape.key}>{shape.name}</option>)}
                 </select>
@@ -40,24 +42,28 @@ export const NewShapeForm = (props: NewShapeFormProps) => {
                 {Object.keys(data?.attributes || {}).map((key) => {
                     return (
                         <label key={key}>
-                            <span>{key}</span>
-                            <input type="number" name={key} defaultValue={(data as any).attributes[key]} />
+                            <span>{TEXTS.FIELDS.ATTRIBUTES[key.toUpperCase()]?.LABEL}</span>
+                            <input required type="number" name={key}
+                                   placeholder={TEXTS.FIELDS.ATTRIBUTES[key.toUpperCase()]?.PLACEHOLDER}
+                                   defaultValue={(data as any).attributes[key]} />
                         </label>
                     )
                 })}
             </div>
             <div className={Styles.row}>
                 <label>
-                    <span>X</span>
-                    <input type="number" name="x" defaultValue={data?.position?.x} />
+                    <span>{TEXTS.FIELDS.X.LABEL}</span>
+                    <input required type="number" name="x" defaultValue={data?.position?.x}
+                           placeholder={TEXTS.FIELDS.X.PLACEHOLDER} />
                 </label>
                 <label>
-                    <span>Y</span>
-                    <input type="number" name="y" defaultValue={data?.position?.y} />
+                    <span>{TEXTS.FIELDS.Y.LABEL}</span>
+                    <input required type="number" name="y" defaultValue={data?.position?.y}
+                           placeholder={TEXTS.FIELDS.Y.PLACEHOLDER} />
                 </label>
             </div>
             <Button type={"submit"}>
-                Add
+                {TEXTS.SUBMIT_BUTTON}
             </Button>
         </form>
     )
