@@ -3,19 +3,21 @@
 import { RectangleShape } from "@/editor/canvas/modules/shapes/rectangle/RectangleShape"
 import { useShape } from "@/editor/canvas/modules/shapes/hooks/useShape"
 
-export type RectangleProps = RectangleShape & {
-    redrawTimes: number
+export type RectangleProps = {
+    redrawTimes: number,
+    shape: RectangleShape
 }
 
-export const Rectangle = ({ position, color, attributes, redrawTimes }: RectangleProps) => {
+export const Rectangle = ({ shape, redrawTimes }: RectangleProps) => {
     useShape({
         redrawTimes,
+        shape,
         draw: (context) => {
-            if (color)
-                context.fillStyle = color
-            context.fillRect(position.x, position.y, attributes.width, attributes.height)
+            if (shape.color)
+                context.fillStyle = shape.color
+            context.fillRect(shape.position.x, shape.position.y, shape.attributes.width, shape.attributes.height)
         },
     })
 
-    return <></>
+    return null
 }

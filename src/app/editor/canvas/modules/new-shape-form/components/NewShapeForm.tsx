@@ -1,17 +1,27 @@
 import React from "react"
-import { Shapes, ShapesWithoutId } from "@/editor/canvas/modules/shapes/types"
+import { ShapesWithoutId } from "@/editor/canvas/modules/shapes/types"
 import Styles from "./NewShapeForm.module.css"
 import { ShapesToComponentMap } from "@/editor/canvas/modules/shapes/ShapesToComponentMap"
 import { useNewShapeForm } from "@/editor/canvas/modules/new-shape-form/components/useNewShapeForm"
 
 export type NewShapeFormProps = {
-    onSubmit: (formData: Shapes) => void,
+    onSubmit: () => void,
     initialData?: ShapesWithoutId,
     onClose: () => void,
 }
 
 export const NewShapeForm = (props: NewShapeFormProps) => {
-    const { data, changeType, onSubmit } = useNewShapeForm({ initialData: props.initialData })
+    const { data, changeType, onSubmit } = useNewShapeForm({
+        initialData: props.initialData,
+        onSubmit: props.onSubmit,
+    })
+
+    const shapes = Object.entries(ShapesToComponentMap).map(([key, value]) => {
+        return {
+            key,
+            name: value.name,
+        }
+    })
 
     return (
         <form className={Styles.form} onSubmit={onSubmit}>
@@ -20,13 +30,13 @@ export const NewShapeForm = (props: NewShapeFormProps) => {
                 <span>Title</span>
                 <input type="text" name="title" defaultValue={data?.title} />
             </label>
-            <label>
+            {shapes.length > 1 ? <label>
                 <span>Type</span>
                 <select name={"type"} defaultValue={data?.type} onChange={changeType}>
-                    {Object.entries(ShapesToComponentMap).map(([key, value]) =>
-                        <option key={key} value={key}>{value.name}</option>)}
+                    {shapes.map((shape) =>
+                        <option key={shape.key} value={shape.key}>{shape.name}</option>)}
                 </select>
-            </label>
+            </label> : <input type="hidden" name="type" defaultValue={data?.type} />}
             <div className={Styles.row}>
                 {Object.keys(data?.attributes || {}).map((key) => {
                     return (

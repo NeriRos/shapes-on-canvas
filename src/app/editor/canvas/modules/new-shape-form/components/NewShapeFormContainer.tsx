@@ -2,7 +2,7 @@
 
 import { CanvasClickListener } from "@/editor/canvas/modules/gestures-detector/components/CanvasClickListener"
 import React, { MouseEvent, useState } from "react"
-import { Shapes, ShapesWithoutId } from "@/editor/canvas/modules/shapes/types"
+import { ShapesWithoutId } from "@/editor/canvas/modules/shapes/types"
 import { NewShapeForm } from "@/editor/canvas/modules/new-shape-form/components/NewShapeForm"
 import Styles from "./NewShapeForm.module.css"
 import clsx from "clsx"
@@ -25,8 +25,7 @@ export const NewShapeFormContainer = (props: { listenToCanvasClick?: boolean }) 
         close()
     }
 
-    const onSubmit = (data: Shapes) => {
-        addShape(data)
+    const onSubmit = () => {
         close()
     }
 
@@ -42,10 +41,11 @@ export const NewShapeFormContainer = (props: { listenToCanvasClick?: boolean }) 
                 <NewShapeForm onClose={close} onSubmit={onSubmit} initialData={shape} /> : null}
             {props.listenToCanvasClick ? <CanvasClickListener action={showForm} shape={{
                 title: "",
-                type: "square",
+                type: "rectangle",
                 color: "red",
                 attributes: {
-                    size: 120,
+                    width: 120,
+                    height: 120,
                 },
             }} /> : null}
         </div>
