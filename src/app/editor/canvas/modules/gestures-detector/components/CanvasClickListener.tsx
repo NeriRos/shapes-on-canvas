@@ -1,20 +1,23 @@
 "use client"
 
 import { useCanvas } from "@/editor/canvas/context"
-import { MouseEvent, useEffect } from "react"
+import { MouseEvent, useCallback, useEffect } from "react"
 import { Shapes } from "@/editor/canvas/modules/shapes/types"
 import { Position } from "@/editor/canvas/types/Shape"
 
+type ListenerFunction = (position: Position, shape?: Shapes, e?: MouseEvent) => void
+
 export type CanvasClickListenerProps = {
-    onClick?: (position: Position, shape: Shapes | null, e: MouseEvent) => void,
-    onMouseDown?: (position: Position, shape: Shapes | null, e: MouseEvent) => void,
-    onMouseUp?: (position: Position, shape: Shapes | null, e: MouseEvent) => void,
+    onClick?: ListenerFunction
+    onMouseDown?: ListenerFunction
+    onMouseUp?: ListenerFunction
+    onMouseMove?: ListenerFunction
 }
 
 export const CanvasClickListener = (props: CanvasClickListenerProps) => {
-    const { ref, shapes, addShape } = useCanvas()
+    const { ref, shapes } = useCanvas()
 
-    const getPosition = (e: MouseEvent) => {
+    const getPosition = useCallback((e: MouseEvent) => {
         let rect = ref.current?.getBoundingClientRect()
         if (rect === undefined) throw new Error("Canvas ref is undefined")
 
@@ -22,12 +25,11 @@ export const CanvasClickListener = (props: CanvasClickListenerProps) => {
             x: e.clientX - rect.left,
             y: e.clientY - rect.top,
         }
-    }
+    }, [ref])
 
-    const getShapeOnPosition = (position: Position): Shapes | null => {
+    const getShapeOnPosition = useCallback((position: Position): Shapes | undefined => {
         for (let shape of shapes) {
             const attributes = shape.attributes
-
             const mouseInX = position.x > shape.position.x && position.x < shape.position.x + attributes.width
             const mouseInY = position.y > shape.position.y && position.y < shape.position.y + attributes.height
 
@@ -35,64 +37,92 @@ export const CanvasClickListener = (props: CanvasClickListenerProps) => {
                 return shape
             }
         }
+    }, [shapes])
 
-        return null
-    }
-
-    const onClick = (e: MouseEvent) => {
-        const position = getPosition(e)
-        const shape = getShapeOnPosition(position)
-
-        props.onClick?.(position, shape, e)
-    }
-
-    const onMouseDown = (e: MouseEvent) => {
-        const position = getPosition(e)
-        const shape = getShapeOnPosition(position)
-
-        props.onMouseDown?.(position, shape, e)
-    }
-
-    const onMouseUp = (e: MouseEvent) => {
-        const position = getPosition(e)
-        const shape = getShapeOnPosition(position)
-
-        props.onMouseUp?.(position, shape, e)
-    }
-
-    useEffect(() => {
+    const onClick = useCallback((e: MouseEvent) => {
         if (props.onClick === undefined) return
-        // @ts-ignore
-        ref.current?.addEventListener("click", onClick)
 
-        return () => {
-            // @ts-ignore
-            ref.current?.removeEventListener("click", onClick)
-        }
-    }, [props.onClick])
+        const position = getPosition(e)
+        const shape = getShapeOnPosition(position)
 
+        props.onClick(position, shape, e)
+    }, [getPosition, getShapeOnPosition, props])
 
-    useEffect(() => {
+    const onMouseDown = useCallback((e: MouseEvent) => {
         if (props.onMouseDown === undefined) return
-        // @ts-ignore
-        ref.current?.addEventListener("mousedown", onMouseDown)
 
-        return () => {
-            // @ts-ignore
-            ref.current?.removeEventListener("mousedown", onMouseDown)
-        }
-    }, [props.onMouseDown])
+        const position = getPosition(e)
+        const shape = getShapeOnPosition(position)
+
+        props.onMouseDown(position, shape, e)
+    }, [getPosition, getShapeOnPosition, props])
+
+    const onMouseUp = useCallback((e: MouseEvent) => {
+        if (props.onMouseUp === undefined) return
+
+        const position = getPosition(e)
+        const shape = getShapeOnPosition(position)
+
+        props.onMouseUp(position, shape, e)
+    }, [getPosition, getShapeOnPosition, props])
+
+    const onMouseMove = useCallback((e: MouseEvent) => {
+        if (props.onMouseMove === undefined) return
+
+        const position = getPosition(e)
+        const shape = getShapeOnPosition(position)
+
+        props.onMouseMove(position, shape, e)
+    }, [getPosition, getShapeOnPosition, props])
 
     useEffect(() => {
-        if (props.onMouseUp === undefined) return
+        const element = ref.current
+
         // @ts-ignore
-        ref.current?.addEventListener("mouseup", onMouseUp)
+        element?.addEventListener("click", onClick)
 
         return () => {
             // @ts-ignore
-            ref.current?.removeEventListener("mouseup", onMouseUp)
+            element?.removeEventListener("click", onClick)
         }
-    }, [props.onMouseUp])
+    }, [onClick, ref])
+
+
+    useEffect(() => {
+        const element = ref.current
+
+        // @ts-ignore
+        element?.addEventListener("mousedown", onMouseDown)
+
+        return () => {
+            // @ts-ignore
+            element?.removeEventListener("mousedown", onMouseDown)
+        }
+    }, [onMouseDown, ref])
+
+    useEffect(() => {
+        const element = ref.current
+
+        // @ts-ignore
+        element?.addEventListener("mouseup", onMouseUp)
+
+        return () => {
+            // @ts-ignore
+            element?.removeEventListener("mouseup", onMouseUp)
+        }
+    }, [onMouseUp, ref])
+
+    useEffect(() => {
+        const element = ref.current
+
+        // @ts-ignore
+        element?.addEventListener("mousemove", onMouseMove)
+
+        return () => {
+            // @ts-ignore
+            element?.removeEventListener("mousemove", onMouseMove)
+        }
+    }, [onMouseMove, ref])
 
     return null
 }
