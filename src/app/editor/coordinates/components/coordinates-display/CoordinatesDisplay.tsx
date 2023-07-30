@@ -1,4 +1,6 @@
-import { ShapeMouseMovementListener } from "@/editor/canvas/modules/gestures-detector/components/ShapeMouseMovementListener"
+import {
+    ShapeMouseMovementListener,
+} from "@/editor/canvas/modules/gestures-detector/components/ShapeMouseMovementListener"
 import Styles from "./CoordinatesDisplay.module.css"
 import { useState } from "react"
 import { Shape } from "@/editor/canvas/components/shape/Shape"
@@ -18,9 +20,9 @@ export const CoordinatesDisplay = (props: CoordinatesDisplayProps) => {
     }
 
     return <>
-        <div className={Styles.title}>
-            {shape?.title}
-        </div>
+        {shape?.title ? <div className={Styles.title}>
+            {shape.title}
+        </div> : null}
         <div className={Styles.coordinateContainer}>
             Mouse X - {coordinates.x}
         </div>
