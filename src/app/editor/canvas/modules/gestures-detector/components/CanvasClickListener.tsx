@@ -2,11 +2,11 @@
 
 import { useCanvas } from "@/editor/canvas/context"
 import { MouseEvent, useEffect } from "react"
-import { Shapes, ShapesWithoutId } from "@/editor/canvas/modules/shapes/types"
+import { ShapesWithoutId } from "@/editor/canvas/modules/shapes/types"
 
 export type CanvasClickListenerProps = {
     shape: Omit<ShapesWithoutId, "position">,
-    action: (shape: Omit<Shapes, "id">) => void
+    action: (shape: ShapesWithoutId) => void
 }
 
 export const CanvasClickListener = (props: CanvasClickListenerProps) => {
@@ -16,7 +16,7 @@ export const CanvasClickListener = (props: CanvasClickListenerProps) => {
         let rect = ref.current?.getBoundingClientRect()
         if (rect === undefined) throw new Error("Canvas ref is undefined")
 
-        const shape: Omit<Shapes, "id"> = {
+        const shape: ShapesWithoutId = {
             ...props.shape,
             position: {
                 x: e.clientX - rect.left,
