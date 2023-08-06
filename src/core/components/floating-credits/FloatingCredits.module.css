@@ -1,5 +1,12 @@
 .credits {
     position: absolute;
-    left: 10px;
-    bottom: 10px;
+    left: 0;
+    bottom: 0;
+    font-size: 1.2rem;
+    font-weight: 500;
+    backdrop-filter: blur(1px);
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
