@@ -1,4 +1,4 @@
-# Sepana Frontend Challenge
+# Frontend Challenge
 
 This is a coding test for evaluating a candidate for frontend skills.
 
@@ -44,8 +44,3 @@ logging when shapes are hovered with the mouse. Create this app in any `React` f
 - Keep your commits and pull-requests small so that it is easy for the reviewer to review your pull-request.
 - If you are stuck anywhere or have any questions, ask us through Github issues. Just keep us posted on the progress
   throughout the project duration. Status updates are very important in a remote team
-
-## Contact us
-
-You can use the exisiting mail thread for all questions about the hiring process itself. Please use this repo's issues
-for technical queries regarding the test.
