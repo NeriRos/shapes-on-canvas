@@ -1,5 +1,6 @@
 import React from "react"
 import "@/styles/global.css"
+import { FloatingCredits } from "@/core/components/floating-credits/FloatingCredits"
 
 export default function RootLayout({
                                        children,
@@ -8,7 +9,10 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-        <body>{children}</body>
+        <body>
+        {children}
+        <FloatingCredits />
+        </body>
         </html>
     )
 }
