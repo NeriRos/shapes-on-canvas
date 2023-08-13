@@ -19,11 +19,11 @@ export const TEXTS = {
             },
         },
         X: {
-            LABEL: "X",
+            LABEL: "Left",
             PLACEHOLDER: "Enter X value",
         },
         Y: {
-            LABEL: "Y",
+            LABEL: "Top",
             PLACEHOLDER: "Enter Y value",
         },
     },
