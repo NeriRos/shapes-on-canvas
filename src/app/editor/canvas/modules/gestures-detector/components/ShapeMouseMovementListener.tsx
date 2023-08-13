@@ -25,19 +25,22 @@ export const ShapeMouseMovementListener = (props: MouseMoveListenerProps) => {
             const position = shape.position
             const attributes = shape.attributes
 
-            const mouseInX = mouseX > position.x && mouseX < position.x + attributes.width
-            const mouseInY = mouseY > position.y && mouseY < position.y + attributes.height
+            const mouseInWidthBoundary = mouseX > position.x && mouseX < position.x + attributes.width
+            const mouseInHeightBoundary = mouseY > position.y && mouseY < position.y + attributes.height
 
-            if (mouseInX && mouseInY) {
-                const relativeX = mouseX - position.x
-                const relativeY = mouseY - position.y
-
+            if (mouseInWidthBoundary && mouseInHeightBoundary) {
                 if (prevShapeId.current !== shape.id) {
                     prevShapeId.current = shape.id
                     props.onShapeChange?.(shape)
                 }
 
-                props.onMove(relativeX, relativeY)
+                const relativeXLeft = mouseX - position.x
+                const relativeYBottom = Math.abs(mouseY - position.y - shape.attributes.height)
+
+                const relativeXPercent = Math.round(relativeXLeft / shape.attributes.width * 100)
+                const relativeYPercent = Math.round(relativeYBottom / shape.attributes.height * 100)
+
+                props.onMove(relativeXPercent, relativeYPercent)
 
                 hoveredOnShape = true
             }
